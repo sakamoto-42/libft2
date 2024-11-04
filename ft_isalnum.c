@@ -6,12 +6,14 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:59:01 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/04 16:43:11 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:32:09 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// checks for an alphanumeric character
+// it is equivalent to (ft_isalpha(c) || ft_isdigit(c))
 int ft_isalnum(int c)
 {
     return (ft_isalpha(c) || ft_isdigit(c));

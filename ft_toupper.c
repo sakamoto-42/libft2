@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:37:32 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/04 18:53:05 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:03:41 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // checks for a lowercase character
-static int  ft_islower(int c)
+static int	ft_islower(int c)
 {
-    return (c >= 97 && c <= 122);
+	return (c >= 97 && c <= 122);
 }
 
 // convert a lowercase letter to an uppercase letter
@@ -27,12 +27,12 @@ static int  ft_islower(int c)
 // function is undefined
 
 // RETURN VALUE
-// The value returned is that of the converted letter, 
+// The value returned is that of the converted letter,
 // or c if the conversion was not possible.
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
-    if (ft_islower(c))
-        return (c - 32);
-    else
-        return (c);
+	if (ft_islower(c))
+		return (c - 32);
+	else
+		return (c);
 }

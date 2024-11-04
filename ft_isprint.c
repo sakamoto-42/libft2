@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:01:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/04 18:21:30 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:29:19 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // checks for any printable character except space
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    return (c >= 32 && c <= 126);
+	return (c >= 32 && c <= 126);
 }

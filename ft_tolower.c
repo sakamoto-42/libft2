@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:44:27 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/04 20:28:37 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/05 09:31:06 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_isupper(char c)
 // function is undefined
 
 // RETURN VALUE
-// The value returned is that of the converted letter,
+// The value returned is that of the converted letter, 
 // or c if the conversion was not possible.
 int	ft_tolower(int c)
 {

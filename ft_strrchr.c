@@ -3,32 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:29:18 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 17:29:43 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:30:54 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-locate character in string
+// locate character in string
 
-DESCRIPTION
-       The strchr() function returns a pointer to the first occurrence of the character c in the string s.
+// DESCRIPTION :
+// The ft_strrchr() function returns a pointer to the last occurrence
+// of the character c in the string s
 
-       The strrchr() function returns a pointer to the last occurrence of the character c in the string s.
+// Note : Here "character" means "byte"
+// This function do not work with wide or multibyte characters.
 
-       The  strchrnul() function is like strchr() except that if c is not found in s, then it returns a pointer to the null byte at the end of
-       s, rather than NULL.
+// RETURN VALUE :
+// The ft_strrchr() function return a pointer to the matched character
+// or NULL if the character is not found
+// The terminating null byte is considered part of the string,
+// so that if c is specified as '\0',
+// this function return a pointer to the terminator.
+char	*ft_strrchr(const char *s, int c)
+{
+	const char	*s_start;
 
-       Here "character" means "byte"; these functions do not work with wide or multibyte characters.
-
-RETURN VALUE
-       The strchr() and strrchr() functions return a pointer to the matched character or NULL if the character is not found.  The  terminating
-       null byte is considered part of the string, so that if c is specified as '\0', these functions return a pointer to the terminator.
-
-       The  strchrnul() function returns a pointer to the matched character, or a pointer to the null byte at the end of s (i.e., s+strlen(s))
-       if the character is not found.
-
-
-char *strrchr(const char *s, int c);
+	s_start = s;
+	while (*s)
+		s++;
+	if (c == '\0')
+		return ((char *)s);
+	while (s >= s_start)
+	{
+		s--;
+		if (*s == c)
+			return ((char *)s);
+	}
+	return (NULL);
+}

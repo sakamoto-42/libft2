@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:23:29 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 16:42:41 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:21:46 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // size-bounded string copying
 
-// DESCRIPTION
+// DESCRIPTION :
 // The ft_strlcpy() function copy a string
 // This is designed to be safer, more consistent, and less error prone
 // replacements for strncpy
@@ -23,14 +23,18 @@
 // (as long as size is larger than 0)
 // Note that a byte for the NUL should be included in size
 // Also note that ft_strlcpy() only operate on true “C” strings
-// This means that src must be NUL-terminated 
+// This means that src must be NUL-terminated
 
 // The ft_strlcpy() function copies up to size - 1 characters
 // from the NUL-terminated string src to dst, NUL-terminating the result
 
-// RETURN VALUES
-// The ft_strlcpy() function return the total length of the string they tried to create
+// RETURN VALUES :
+// The ft_strlcpy() function return the total length
+// of the string they tried to create
 // That means the length of src
+// While this may seem somewhat confusing,
+// it was done to make truncation detection simple.
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;

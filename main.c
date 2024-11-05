@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 17:17:42 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/05 20:59:42 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	ft_strlen_tester(void)
 		ft_free_tab(str, 4);
 		return (0);
 	}
-	memcpy(str[4], "Hello\nworld\0", 14);
+	memcpy(str[4], "Hello\nworld\0", 13);
 	str[5] = malloc((0 + 1) * sizeof(char));
 	if (!str[5])
 	{
@@ -211,20 +211,20 @@ char	*ft_src_init(const char *str, int n)
 	src = malloc((n + 1) * sizeof(char));
 	if (!src)
 		return (NULL);
-    strcpy(src, str);
+	strcpy(src, str);
 	return (src);
 }
 
 int ft_memset_tester()
 {
-    char    *src_tested;
+	char	*src_tested;
 	char	*src_tester;
-    char    c;
+	char	c;
 	size_t	n;
 	int		passed;
 
 	passed = 1;
-    n = 3;
+	n = 3;
 	c = 'Z';
 	src_tested = ft_src_init("AAAAA", 5);
 	if (!src_tested)
@@ -236,11 +236,12 @@ int ft_memset_tester()
 	src_tester = memset(src_tester, c, n);
 	if (strcmp(src_tested, src_tester) != 0)
 	{
-		printf("Error :\nExpected :\n%s\nGot: %s\n\n", src_tested, src_tester);
+		printf("Error :\nExpected : %s\nGot: %s\n\n", src_tested, src_tester);
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected :\n%s\nGot: %s\n\n", src_tested, src_tester);
+		printf("Success :\nExpected : %s\nGot: %s\n\n",
+			src_tested, src_tester);
 	//free(src_tested);
 	//free(src_tester);
 	if (!passed)
@@ -262,11 +263,11 @@ void	ft_print_memory(char *str, size_t n)
 
 int ft_bzero_tester()
 {
-	char    *src_tested;
+	char	*src_tested;
 	char	*src_tester;
 	size_t	n;
 	int		passed;
-	
+
 	passed = 1;
 	n = 3;
 	src_tested = ft_src_init("AAAAA", 5);
@@ -275,17 +276,17 @@ int ft_bzero_tester()
 	bzero(src_tester, n);
 	if (strcmp(src_tested, src_tester) != 0)
 	{
-		printf("Error\nExpected :\n");
+		printf("Error\nExpected : ");
 		ft_print_memory(src_tested, 5);
-		printf("\nGot :\n");
+		printf("\nGot : ");
 		ft_print_memory(src_tester, 5);
 		passed = 0;
 	}
 	else
 	{
-		printf("Success\nExpected :\n");
+		printf("Success\nExpected : ");
 		ft_print_memory(src_tested, 5);
-		printf("\nGot :\n");
+		printf("\nGot : ");
 		ft_print_memory(src_tester, 5);
 		printf("\n\n");
 	}
@@ -303,9 +304,9 @@ int ft_memcpy_tester()
 	char	*dest_tester;
 	size_t	n;
 	int		passed;
-    
+
 	passed = 1;
-    n = 3;
+	n = 3;
 	src = ft_src_init("AAAAA", 5);
 	dest_tested = malloc((5 + 1) * sizeof(char));
 	if (!dest_tested)
@@ -321,7 +322,8 @@ int ft_memcpy_tester()
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		printf("Success :\nExpected : %s\nGot: %s\n\n",
+			dest_tested, dest_tester);
 	//free(dest_tested);
 	//free(dest_tester);
 	if (!passed)
@@ -338,9 +340,9 @@ int ft_memmove_tester()
 	char	*dest_tester_overlap;
 	int		passed;
 	size_t	n;
-    
+
 	passed = 1;
-    n = 5;
+	n = 5;
 	src = ft_src_init("Hello, world!", 13);
 	dest_tested = malloc((5 + 1) * sizeof(char));
 	if (!dest_tested)
@@ -356,7 +358,8 @@ int ft_memmove_tester()
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		printf("Success :\nExpected : %s\nGot: %s\n\n",
+			dest_tested, dest_tester);
 	//free(dest_tested);
 	//free(dest_tester);
 	dest_tested_overlap = src + 7;
@@ -365,11 +368,13 @@ int ft_memmove_tester()
 	dest_tester_overlap = memmove(dest_tester_overlap, src, n);
 	if (strcmp(dest_tested_overlap, dest_tester_overlap) != 0)
 	{
-		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tested_overlap, dest_tester_overlap);
+		printf("Error :\nExpected : %s\nGot: %s\n\n",
+			dest_tested_overlap, dest_tester_overlap);
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected : %s\nGot: %s\n\n", dest_tested_overlap, dest_tester_overlap);
+		printf("Success :\nExpected : %s\nGot: %s\n\n",
+			dest_tested_overlap, dest_tester_overlap);
 	//free(dest_tested_overlap);
 	//free(dest_tester_overlap);
 	if (!passed)
@@ -390,9 +395,9 @@ int	ft_strlcpy_tester()
 	size_t	strlcpy_result_tester_zero;
 	int		passed;
 	size_t	n;
-    
+
 	passed = 1;
-    n = 6;
+	n = 6;
 	src = ft_src_init("Hello, world!", 13);
 	dest_tested = malloc((5 + 1) * sizeof(char));
 	if (!dest_tested)
@@ -402,14 +407,17 @@ int	ft_strlcpy_tester()
 	if (!dest_tester)
 		return (0);
 	strlcpy_result_tester = strlcpy(dest_tester, src, n);
-	if (strcmp(dest_tested, dest_tester) != 0 && strlcpy_result_tested == strlcpy_result_tester)
+	if (strcmp(dest_tested, dest_tester) != 0
+		&& strlcpy_result_tested == strlcpy_result_tester)
 	{
-		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n", strlcpy_result_tested, dest_tested,
+		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcpy_result_tested, dest_tested,
 			strlcpy_result_tester, dest_tester);
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n", strlcpy_result_tested, dest_tested,
+		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcpy_result_tested, dest_tested,
 			strlcpy_result_tester, dest_tester);
 	//free(dest_tested);
 	//free(dest_tester);
@@ -421,14 +429,17 @@ int	ft_strlcpy_tester()
 	if (!dest_tester_zero)
 		return (0);
 	strlcpy_result_tester_zero = strlcpy(dest_tester_zero, src, 0);
-	if (strcmp(dest_tested_zero, dest_tester_zero) != 0 && strlcpy_result_tested_zero == strlcpy_result_tester_zero)
+	if (strcmp(dest_tested_zero, dest_tester_zero) != 0
+		&& strlcpy_result_tested_zero == strlcpy_result_tester_zero)
 	{
-		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n", strlcpy_result_tested_zero, dest_tested_zero,
+		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcpy_result_tested_zero, dest_tested_zero,
 			strlcpy_result_tester_zero, dest_tester_zero);
 		passed = 0;
 	}
 	else
-		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n", strlcpy_result_tested_zero, dest_tested_zero,
+		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcpy_result_tested_zero, dest_tested_zero,
 			strlcpy_result_tester_zero, dest_tester_zero);
 	//ree(dest_tested_zero);
 	//free(dest_tester_zero);

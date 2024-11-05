@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:56:59 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 13:03:57 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:22:24 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // overlap src or dest, and the bytes are then copied from the temporary
 // array to dest
 
-// RETURN VALUE
+// RETURN VALUE :
 // The ft_memmove() function returns a pointer to dest
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
@@ -31,6 +31,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	const unsigned char	*src_start_ptr;
 	const unsigned char	*src_end_ptr;
 
+	if (!dest && !src)
+		return (NULL);
 	dest_start_ptr = (unsigned char *) dest;
 	dest_end_ptr = ((unsigned char *) dest) + n - 1;
 	src_start_ptr = (unsigned char *) src;

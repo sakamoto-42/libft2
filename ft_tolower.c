@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:44:27 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 09:12:33 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:39:06 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@ static int	ft_isupper(char c)
 {
 	return (c >= 65 && c <= 90);
 }
-
 
 // convert an uppercase letter to a lowercase letter
 
@@ -28,8 +27,8 @@ static int	ft_isupper(char c)
 // function is undefined
 
 // RETURN VALUE :
-// The value returned is that of the converted letter, 
-// or c if the conversion was not possible.
+// The value returned is that of the converted letter,
+// or c if the conversion was not possible
 int	ft_tolower(int c)
 {
 	if (ft_isupper(c))

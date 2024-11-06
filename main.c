@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 14:47:50 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:33:38 by julien           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,14 +442,15 @@ int	ft_strlcpy_tester()
 		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
 			strlcpy_result_tested_zero, dest_tested_zero,
 			strlcpy_result_tester_zero, dest_tester_zero);
-	//ree(dest_tested_zero);
+	//free(dest_tested_zero);
 	//free(dest_tester_zero);
 	if (!passed)
 		return (0);
 	return (1);
 }
 
-int	ft_strchr_strrchr_sub_tester(char *(ft_tested)(const char *, int), char *(*ft_tester)(const char *, int), char *src, int c)
+int	ft_strchr_strrchr_sub_tester(char *(ft_tested)(const char *, int),
+	char *(*ft_tester)(const char *, int), char *src, int c)
 {
 	char	*dest_tested;
 	char	*dest_tester;
@@ -477,15 +478,20 @@ int	ft_strchr_strrchr_sub_tester(char *(ft_tested)(const char *, int), char *(*f
 	}
 }
 
-int	ft_strchr_strrchr_tester(char *(ft_tested)(const char *, int), char *(*ft_tester)(const char *, int))
+int	ft_strchr_strrchr_tester(char *(ft_tested)(const char *, int),
+	char *(*ft_tester)(const char *, int))
 {
 	int		passed;
 
 	passed = 1;
-	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", ' ');
-	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", 'a');
-	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", 'o');
-	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "", 'a');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester,
+			"Hello, world!", ' ');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester,
+			"Hello, world!", 'a');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester,
+			"Hello, world!", 'o');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester,
+			"", 'a');
 	if (!passed)
 		return (0);
 	return (1);
@@ -532,7 +538,7 @@ int	ft_memchr_sub_tester(char *src, int c, size_t n)
 	}
 }
 
-int	ft_memchr_tester()
+int	ft_memchr_tester(void)
 {
 	int		passed;
 
@@ -547,12 +553,10 @@ int	ft_memchr_tester()
 	return (1);
 }
 
-
 int	ft_strncmp_sub_tester(char *s1, char *s2, size_t n)
 {
 	int	strncmp_result_tested;
 	int	strncmp_result_tester;
-
 
 	strncmp_result_tested = ft_strncmp(s1, s2, n);
 	strncmp_result_tester = strncmp(s1, s2, n);
@@ -570,9 +574,9 @@ int	ft_strncmp_sub_tester(char *s1, char *s2, size_t n)
 	}
 }
 
-int	ft_strncmp_tester()
+int ft_strncmp_tester(void)
 {
-	int		passed;
+	int	passed;
 
 	passed = 1;
 	passed = ft_strncmp_sub_tester("Hello, world!", "Hello", 0);
@@ -584,6 +588,52 @@ int	ft_strncmp_tester()
 	passed = ft_strncmp_sub_tester("Hella, world!", "Hello, world!", 13);
 	passed = ft_strncmp_sub_tester("Hello, world!", "Hella, world!", 13);
 	passed = ft_strncmp_sub_tester("Hella, world!", "Hello, world!", 4);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_strlcat_sub_tester(char *dst, char *src, size_t size)
+{
+	size_t	strlcat_result_tested;
+	size_t	strlcat_result_tester;
+	char	*strlcat_dest_tested;
+	char	*strlcat_dest_tester;
+
+	strlcat_dest_tested = ft_src_init(dst, ft_strlen(dst));
+	strlcat_result_tested = ft_strlcat(strlcat_dest_tested, src, size);
+	strlcat_dest_tester = ft_src_init(dst, ft_strlen(dst));
+	strlcat_result_tester = strlcat(strlcat_dest_tester, src, size);
+	if (strlcat_result_tested != strlcat_result_tester)
+	{
+		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcat_result_tested, strlcat_dest_tested,
+			strlcat_result_tester, strlcat_dest_tester);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
+			strlcat_result_tested, strlcat_dest_tested,
+			strlcat_result_tester, strlcat_dest_tester);
+		return (1);
+	}
+}
+
+int	ft_strlcat_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 14);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 0);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 13);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 3);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 4);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 5);
+	passed = ft_strlcat_sub_tester("Hello, ", "world!", 20);
+	passed = ft_strlcat_sub_tester("Hello, ", "", 13);
+	passed = ft_strlcat_sub_tester("", "world!", 13);
 	if (!passed)
 		return (0);
 	return (1);
@@ -616,10 +666,8 @@ void	ft_main_tester(char *ft_name)
 		res = ft_memmove_tester();
 	else if (strcmp(ft_name, "strlcpy") == 0)
 		res = ft_strlcpy_tester();
-	/*
 	else if (strcmp(ft_name, "strlcat") == 0)
-		res = ft_tester(ft_strlcat, strlcat);
-	*/
+		res = ft_strlcat_tester();
 	else if (strcmp(ft_name, "toupper") == 0)
 		res = ft_to_tester(ft_toupper, toupper);
 	else if (strcmp(ft_name, "tolower") == 0)
@@ -631,7 +679,7 @@ void	ft_main_tester(char *ft_name)
 	else if (strcmp(ft_name, "strncmp") == 0)
 		res = ft_strncmp_tester();
 	else if (strcmp(ft_name, "memchr") == 0)
-		res = ft_memchr_tester(ft_memchr, memchr);
+		res = ft_memchr_tester();
 	/*
 	else if (strcmp(ft_name, "memcmp") == 0)
 		res = ft_tester(ft_memcmp, memcmp);
@@ -660,7 +708,7 @@ int	main(void)
 	ft_main_tester("memcpy");
 	ft_main_tester("memmove");
 	ft_main_tester("strlcpy");
-	//ft_main_tester("strlcat");
+	ft_main_tester("strlcat");
 	ft_main_tester("toupper");
 	ft_main_tester("tolower");
 	ft_main_tester("strchr");

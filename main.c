@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 20:59:42 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/06 14:47:50 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ int ft_bzero_tester()
 		ft_print_memory(src_tested, 5);
 		printf("\nGot : ");
 		ft_print_memory(src_tester, 5);
+		printf("\n\n");
 		passed = 0;
 	}
 	else
@@ -448,6 +449,146 @@ int	ft_strlcpy_tester()
 	return (1);
 }
 
+int	ft_strchr_strrchr_sub_tester(char *(ft_tested)(const char *, int), char *(*ft_tester)(const char *, int), char *src, int c)
+{
+	char	*dest_tested;
+	char	*dest_tester;
+	size_t	src_len;
+
+	src_len = strlen(src);
+	dest_tested = malloc((src_len + 1) * sizeof(char));
+	if (!dest_tested)
+		return (0);
+	dest_tested = ft_tested(src, c);
+	dest_tester = malloc((src_len + 1) * sizeof(char));
+	if (!dest_tester)
+		return (0);
+	dest_tester = ft_tester(src, c);
+	if ((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n",
+			dest_tested, dest_tester);
+		return (1);
+	}
+}
+
+int	ft_strchr_strrchr_tester(char *(ft_tested)(const char *, int), char *(*ft_tester)(const char *, int))
+{
+	int		passed;
+
+	passed = 1;
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", ' ');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", 'a');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "Hello, world!", 'o');
+	passed = ft_strchr_strrchr_sub_tester(ft_tested, ft_tester, "", 'a');
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_memchr_sub_tester(char *src, int c, size_t n)
+{
+	char	*dest_tested;
+	char	*dest_tester;
+	size_t	src_len;
+
+	src_len = strlen(src);
+	dest_tested = malloc((src_len + 1) * sizeof(char));
+	if (!dest_tested)
+		return (0);
+	dest_tested = ft_memchr(src, c, n);
+	dest_tester = malloc((src_len + 1) * sizeof(char));
+	if (!dest_tester)
+		return (0);
+	dest_tester = memchr(src, c, n);
+	if ((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+	{
+		printf("Error\nExpected : ");
+		ft_print_memory(dest_tested, n);
+		printf("\nGot : ");
+		ft_print_memory(dest_tester, n);
+		printf("\n\n");
+		return (0);
+	}
+	else
+	{
+		printf("Success\nExpected : ");
+		if (dest_tested && dest_tester)
+			ft_print_memory(dest_tested, n);
+		else
+			printf("NULL");
+		printf("\nGot : ");
+		if (dest_tested && dest_tester)
+			ft_print_memory(dest_tester, n);
+		else
+			printf("NULL");
+		printf("\n\n");
+		return (1);
+	}
+}
+
+int	ft_memchr_tester()
+{
+	int		passed;
+
+	passed = 1;
+	passed = ft_memchr_sub_tester("Hello, world!", 'H', 0);
+	passed = ft_memchr_sub_tester("Hello, world!", '\0', 14);
+	passed = ft_memchr_sub_tester("Hello, world!", 'o', 14);
+	passed = ft_memchr_sub_tester("Hello, world!", 'a', 14);
+	passed = ft_memchr_sub_tester("", 'a', 14);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+
+int	ft_strncmp_sub_tester(char *s1, char *s2, size_t n)
+{
+	int	strncmp_result_tested;
+	int	strncmp_result_tester;
+
+
+	strncmp_result_tested = ft_strncmp(s1, s2, n);
+	strncmp_result_tester = strncmp(s1, s2, n);
+	if (strncmp_result_tested != strncmp_result_tester)
+	{
+		printf("Error :\nExpected : %d\nGot: %d\n\n",
+			strncmp_result_tested, strncmp_result_tester);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %d\nGot: %d\n\n",
+			strncmp_result_tested, strncmp_result_tester);
+		return (1);
+	}
+}
+
+int	ft_strncmp_tester()
+{
+	int		passed;
+
+	passed = 1;
+	passed = ft_strncmp_sub_tester("Hello, world!", "Hello", 0);
+	passed = ft_strncmp_sub_tester("Hello, world!", "world", 5);
+	passed = ft_strncmp_sub_tester("", "Hello", 5);
+	passed = ft_strncmp_sub_tester("Hello", "", 5);
+	passed = ft_strncmp_sub_tester("Hello, world!", "Hello, world!", 14);
+	passed = ft_strncmp_sub_tester("Hello, world!", "Hello, world!", 13);
+	passed = ft_strncmp_sub_tester("Hella, world!", "Hello, world!", 13);
+	passed = ft_strncmp_sub_tester("Hello, world!", "Hella, world!", 13);
+	passed = ft_strncmp_sub_tester("Hella, world!", "Hello, world!", 4);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
 void	ft_main_tester(char *ft_name)
 {
 	int	res;
@@ -483,15 +624,15 @@ void	ft_main_tester(char *ft_name)
 		res = ft_to_tester(ft_toupper, toupper);
 	else if (strcmp(ft_name, "tolower") == 0)
 		res = ft_to_tester(ft_tolower, tolower);
-	/*
 	else if (strcmp(ft_name, "strchr") == 0)
-		res = ft_tester(ft_strchr, strchr);
+		res = ft_strchr_strrchr_tester(ft_strchr, strchr);
 	else if (strcmp(ft_name, "strrchr") == 0)
-		res = ft_tester(ft_strrchr, strrchr);
+		res = ft_strchr_strrchr_tester(ft_strrchr, strrchr);
 	else if (strcmp(ft_name, "strncmp") == 0)
-		res = ft_tester(ft_strncmp, strncmp);
+		res = ft_strncmp_tester();
 	else if (strcmp(ft_name, "memchr") == 0)
-		res = ft_tester(ft_memchr, memchr);
+		res = ft_memchr_tester(ft_memchr, memchr);
+	/*
 	else if (strcmp(ft_name, "memcmp") == 0)
 		res = ft_tester(ft_memcmp, memcmp);
 	else if (strcmp(ft_name, "strnstr") == 0)
@@ -522,10 +663,10 @@ int	main(void)
 	//ft_main_tester("strlcat");
 	ft_main_tester("toupper");
 	ft_main_tester("tolower");
-	//ft_main_tester("strchr");
-	//ft_main_tester("strrchr");
-	//ft_main_tester("strncmp");
-	//ft_main_tester("memchr");
+	ft_main_tester("strchr");
+	ft_main_tester("strrchr");
+	ft_main_tester("strncmp");
+	ft_main_tester("memchr");
 	//ft_main_tester("memcmp");
 	//ft_main_tester("strnstr");
 	//ft_main_tester("atoi");

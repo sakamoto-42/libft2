@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 19:41:13 by julien            #+#    #+#             */
-/*   Updated: 2024/11/05 21:31:42 by julien           ###   ########.fr       */
+/*   Created: 2024/11/06 09:11:29 by juduchar          #+#    #+#             */
+/*   Updated: 2024/11/06 14:47:08 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 
@@ -33,8 +34,12 @@
 // respectively, to be less than, to match, or be greater than s2
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	(void) s1;
-	(void) s2;
-	(void) n;
+	while (n--)
+	{
+		if ((unsigned char) *s1 != (unsigned char) *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
 	return (0);
 }

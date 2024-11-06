@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:44:27 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 09:31:06 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/06 09:12:33 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_isupper(char c)
 // If c is neither an unsigned char value nor EOF, the behavior of this
 // function is undefined
 
-// RETURN VALUE
+// RETURN VALUE :
 // The value returned is that of the converted letter, 
 // or c if the conversion was not possible.
 int	ft_tolower(int c)

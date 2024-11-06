@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:21:13 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/05 19:03:34 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/05 09:21:56 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // checks for an uppercase letter
-static int	ft_isupper(int c)
+static int	ft_isupper(char c)
 {
 	return (c >= 65 && c <= 90);
 }

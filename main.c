@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 18:33:38 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/07 11:18:29 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 #include <bsd/string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
 
 int	ft_ascii_tester(int (*ft_tested)(int i), int (*ft_tester)(int i))
 {
@@ -198,7 +201,7 @@ int	ft_strlen_tester(void)
 		}
 		i++;
 	}
-	//free(str);
+	free(str);
 	if (!passed)
 		return (0);
 	return (1);
@@ -236,12 +239,12 @@ int ft_memset_tester()
 	src_tester = memset(src_tester, c, n);
 	if (strcmp(src_tested, src_tester) != 0)
 	{
-		printf("Error :\nExpected : %s\nGot: %s\n\n", src_tested, src_tester);
+		printf("Error :\nExpected : %s\nGot: %s\n\n", src_tester, src_tested);
 		passed = 0;
 	}
 	else
 		printf("Success :\nExpected : %s\nGot: %s\n\n",
-			src_tested, src_tester);
+			src_tester, src_tested);
 	//free(src_tested);
 	//free(src_tester);
 	if (!passed)
@@ -277,18 +280,18 @@ int ft_bzero_tester()
 	if (strcmp(src_tested, src_tester) != 0)
 	{
 		printf("Error\nExpected : ");
-		ft_print_memory(src_tested, 5);
-		printf("\nGot : ");
 		ft_print_memory(src_tester, 5);
+		printf("\nGot : ");
+		ft_print_memory(src_tested, 5);
 		printf("\n\n");
 		passed = 0;
 	}
 	else
 	{
 		printf("Success\nExpected : ");
-		ft_print_memory(src_tested, 5);
-		printf("\nGot : ");
 		ft_print_memory(src_tester, 5);
+		printf("\nGot : ");
+		ft_print_memory(src_tested, 5);
 		printf("\n\n");
 	}
 	//free(src_tested);
@@ -319,12 +322,12 @@ int ft_memcpy_tester()
 	dest_tester = memcpy(dest_tester, src, n);
 	if (strcmp(dest_tested, dest_tester) != 0)
 	{
-		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tester, dest_tested);
 		passed = 0;
 	}
 	else
 		printf("Success :\nExpected : %s\nGot: %s\n\n",
-			dest_tested, dest_tester);
+			dest_tester, dest_tested);
 	//free(dest_tested);
 	//free(dest_tester);
 	if (!passed)
@@ -355,7 +358,7 @@ int ft_memmove_tester()
 	dest_tester = memmove(dest_tester, src, n);
 	if (strcmp(dest_tested, dest_tester) != 0)
 	{
-		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tester, dest_tested);
 		passed = 0;
 	}
 	else
@@ -370,12 +373,12 @@ int ft_memmove_tester()
 	if (strcmp(dest_tested_overlap, dest_tester_overlap) != 0)
 	{
 		printf("Error :\nExpected : %s\nGot: %s\n\n",
-			dest_tested_overlap, dest_tester_overlap);
+			dest_tester_overlap, dest_tested_overlap);
 		passed = 0;
 	}
 	else
 		printf("Success :\nExpected : %s\nGot: %s\n\n",
-			dest_tested_overlap, dest_tester_overlap);
+			dest_tester_overlap, dest_tested_overlap);
 	//free(dest_tested_overlap);
 	//free(dest_tester_overlap);
 	if (!passed)
@@ -412,14 +415,14 @@ int	ft_strlcpy_tester()
 		&& strlcpy_result_tested == strlcpy_result_tester)
 	{
 		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcpy_result_tested, dest_tested,
-			strlcpy_result_tester, dest_tester);
+			strlcpy_result_tester, dest_tester,
+			strlcpy_result_tested, dest_tested);
 		passed = 0;
 	}
 	else
 		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcpy_result_tested, dest_tested,
-			strlcpy_result_tester, dest_tester);
+			strlcpy_result_tester, dest_tester,
+			strlcpy_result_tested, dest_tested);
 	//free(dest_tested);
 	//free(dest_tester);
 	dest_tested_zero = malloc((0 + 1) * sizeof(char));
@@ -434,14 +437,14 @@ int	ft_strlcpy_tester()
 		&& strlcpy_result_tested_zero == strlcpy_result_tester_zero)
 	{
 		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcpy_result_tested_zero, dest_tested_zero,
-			strlcpy_result_tester_zero, dest_tester_zero);
+			strlcpy_result_tester_zero, dest_tester_zero,
+			strlcpy_result_tested_zero, dest_tested_zero);
 		passed = 0;
 	}
 	else
 		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcpy_result_tested_zero, dest_tested_zero,
-			strlcpy_result_tester_zero, dest_tester_zero);
+			strlcpy_result_tester_zero, dest_tester_zero,
+			strlcpy_result_tested_zero, dest_tested_zero);
 	//free(dest_tested_zero);
 	//free(dest_tester_zero);
 	if (!passed)
@@ -465,15 +468,21 @@ int	ft_strchr_strrchr_sub_tester(char *(ft_tested)(const char *, int),
 	if (!dest_tester)
 		return (0);
 	dest_tester = ft_tester(src, c);
-	if ((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+	if (((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+		|| (dest_tested == NULL && dest_tester != NULL)
+		|| (dest_tested != NULL && dest_tester == NULL))
 	{
-		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tested, dest_tester);
+		printf("Error :\nExpected : %s\nGot: %s\n\n", dest_tester, dest_tested);
+		//free(dest_tested);
+		//free(dest_tester);
 		return (0);
 	}
 	else
 	{
 		printf("Success :\nExpected : %s\nGot: %s\n\n",
-			dest_tested, dest_tester);
+			dest_tester, dest_tested);
+		//free(dest_tested);
+		//free(dest_tester);
 		return (1);
 	}
 }
@@ -512,28 +521,34 @@ int	ft_memchr_sub_tester(char *src, int c, size_t n)
 	if (!dest_tester)
 		return (0);
 	dest_tester = memchr(src, c, n);
-	if ((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+	if (((dest_tested && dest_tester) && strcmp(dest_tested, dest_tester) != 0)
+		|| (dest_tested == NULL && dest_tester != NULL)
+		|| (dest_tested != NULL && dest_tester == NULL))
 	{
 		printf("Error\nExpected : ");
-		ft_print_memory(dest_tested, n);
-		printf("\nGot : ");
 		ft_print_memory(dest_tester, n);
+		printf("\nGot : ");
+		ft_print_memory(dest_tested, n);
 		printf("\n\n");
+		//free(dest_tested);
+		//free(dest_tester);
 		return (0);
 	}
 	else
 	{
 		printf("Success\nExpected : ");
 		if (dest_tested && dest_tester)
-			ft_print_memory(dest_tested, n);
+			ft_print_memory(dest_tester, n);
 		else
 			printf("NULL");
 		printf("\nGot : ");
 		if (dest_tested && dest_tester)
-			ft_print_memory(dest_tester, n);
+			ft_print_memory(dest_tested, n);
 		else
 			printf("NULL");
 		printf("\n\n");
+		//free(dest_tested);
+		//free(dest_tester);
 		return (1);
 	}
 }
@@ -563,13 +578,13 @@ int	ft_strncmp_sub_tester(char *s1, char *s2, size_t n)
 	if (strncmp_result_tested != strncmp_result_tester)
 	{
 		printf("Error :\nExpected : %d\nGot: %d\n\n",
-			strncmp_result_tested, strncmp_result_tester);
+			strncmp_result_tester, strncmp_result_tested);
 		return (0);
 	}
 	else
 	{
 		printf("Success :\nExpected : %d\nGot: %d\n\n",
-			strncmp_result_tested, strncmp_result_tester);
+			strncmp_result_tester, strncmp_result_tested);
 		return (1);
 	}
 }
@@ -607,15 +622,19 @@ int	ft_strlcat_sub_tester(char *dst, char *src, size_t size)
 	if (strlcat_result_tested != strlcat_result_tester)
 	{
 		printf("Error :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcat_result_tested, strlcat_dest_tested,
-			strlcat_result_tester, strlcat_dest_tester);
+			strlcat_result_tester, strlcat_dest_tester,
+			strlcat_result_tested, strlcat_dest_tested);
+		//free(strlcat_dest_tested);
+		//free(strlcat_dest_tester);
 		return (0);
 	}
 	else
 	{
 		printf("Success :\nExpected : %ld (%s)\nGot: %ld (%s)\n\n",
-			strlcat_result_tested, strlcat_dest_tested,
-			strlcat_result_tester, strlcat_dest_tester);
+			strlcat_result_tester, strlcat_dest_tester,
+			strlcat_result_tested, strlcat_dest_tested);
+		//free(strlcat_dest_tested);
+		//free(strlcat_dest_tester);
 		return (1);
 	}
 }
@@ -639,10 +658,299 @@ int	ft_strlcat_tester(void)
 	return (1);
 }
 
-void	ft_main_tester(char *ft_name)
+int	ft_atoi_sub_tester(char *str)
+{
+	int	atoi_result_tested;
+	int	atoi_result_tester;
+
+	atoi_result_tested = ft_atoi(str);
+	atoi_result_tester = atoi(str);
+	if (atoi_result_tested != atoi_result_tester)
+	{
+		printf("Error :\nExpected : %d\nGot: %d\n\n",
+			atoi_result_tester, atoi_result_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %d\nGot: %d\n\n",
+			atoi_result_tester, atoi_result_tested);
+		return (1);
+	}
+}
+
+int	ft_atoi_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_atoi_sub_tester("");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v-42");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v42");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v-42abcd");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v42abcd");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v42abcd24");
+	passed = ft_atoi_sub_tester(" \f\n\r\t\v-42abcd24");
+	passed = ft_atoi_sub_tester("0-42");
+	passed = ft_atoi_sub_tester("0+42");
+	passed = ft_atoi_sub_tester("+42");
+	passed = ft_atoi_sub_tester("-42");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_memcmp_sub_tester(char *s1, char *s2, size_t n)
+{
+	int	memcmp_result_tested;
+	int	memcmp_result_tester;
+
+	memcmp_result_tested = ft_memcmp(s1, s2, n);
+	memcmp_result_tester = memcmp(s1, s2, n);
+	if (memcmp_result_tested != memcmp_result_tester)
+	{
+		printf("Error :\nExpected : %d\nGot: %d\n\n",
+			memcmp_result_tester, memcmp_result_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %d\nGot: %d\n\n",
+			memcmp_result_tester, memcmp_result_tested);
+		return (1);
+	}
+}
+
+int ft_memcmp_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_memcmp_sub_tester("Hello, world!", "Hello", 0);
+	passed = ft_memcmp_sub_tester("Hello, world!", "world!", 5);
+	passed = ft_memcmp_sub_tester("", "Hello", 5);
+	passed = ft_memcmp_sub_tester("Hello", "", 5);
+	passed = ft_memcmp_sub_tester("Hello, world!", "Hello, world!", 14);
+	passed = ft_memcmp_sub_tester("Hello, world!", "Hello, world!", 13);
+	passed = ft_memcmp_sub_tester("Hella, world!", "Hello, world!", 13);
+	passed = ft_memcmp_sub_tester("Hello, world!", "Hella, world!", 13);
+	passed = ft_memcmp_sub_tester("Hella, world!", "Hello, world!", 4);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_strnstr_sub_tester(char *big, char *little, size_t len)
+{
+	char	*strnstr_dest_tested;
+	char	*strnstr_dest_tester;
+
+	strnstr_dest_tested = ft_src_init(big, ft_strlen(big));
+	strnstr_dest_tested = ft_strnstr(big, little, len);
+	strnstr_dest_tester = ft_src_init(big, ft_strlen(big));
+	strnstr_dest_tester = strnstr(big, little, len);
+	if (((strnstr_dest_tested && strnstr_dest_tester) && strcmp(strnstr_dest_tested, strnstr_dest_tester) != 0)
+		|| (strnstr_dest_tested == NULL && strnstr_dest_tester != NULL)
+		|| (strnstr_dest_tested != NULL && strnstr_dest_tester == NULL))
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", strnstr_dest_tester, strnstr_dest_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", strnstr_dest_tester, strnstr_dest_tested);
+		return (1);
+	}
+}
+
+int	ft_strnstr_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strnstr_sub_tester("Hello, world!", "Hello", 5);
+	passed = ft_strnstr_sub_tester("Hello, world!", "world", 5);
+	passed = ft_strnstr_sub_tester("Hello, world!", "world!", 13);
+	passed = ft_strnstr_sub_tester("Hello, world ; Hello, world!", "Hello", 28);
+	passed = ft_strnstr_sub_tester("Hello, world!", "world", 50);
+	passed = ft_strnstr_sub_tester("", "Hello", 5);
+	passed = ft_strnstr_sub_tester("Hello", "", 5);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_calloc_sub_tester(size_t	nmemb, size_t size)
+{
+	int		*calloc_memory_tested;
+	int		*calloc_memory_tester;
+	int		calloc_memory_tested_initialized;
+	int		calloc_memory_tester_initialized;
+	size_t	i;
+	int		res;
+
+	res = 1;
+	calloc_memory_tested = (int *)ft_calloc(nmemb * size, sizeof(int));
+	if (calloc_memory_tested == NULL)
+		return (0);
+	calloc_memory_tester = (int *)calloc(nmemb * size, sizeof(int));
+	if (calloc_memory_tester == NULL)
+		return (0);
+	calloc_memory_tested_initialized = 1;
+	calloc_memory_tester_initialized = 1;
+	i = 0;
+	while (i < nmemb * size)
+	{
+		if (calloc_memory_tested[i] != 0)
+			calloc_memory_tested_initialized = 0;
+		if (calloc_memory_tester[i] != 0)
+			calloc_memory_tester_initialized = 0;
+		i++;
+	}
+	if (calloc_memory_tested_initialized != calloc_memory_tester_initialized)
+	{
+		printf("Error :\nExpected : Memory initialized : %d\nGot: Memory initialized : %d\n\n",
+			calloc_memory_tester_initialized, calloc_memory_tested_initialized);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected : Memory initialized : %d\nGot: Memory initialized : %d\n\n",
+			calloc_memory_tester_initialized, calloc_memory_tested_initialized);
+	if (memcmp(calloc_memory_tested, calloc_memory_tester, nmemb * size) != 0)
+	{
+		printf("Error\nExpected :\n");
+		ft_print_memory((char *)calloc_memory_tester, nmemb * size);
+		printf("\nGot :\n");
+		ft_print_memory((char *)calloc_memory_tested, nmemb * size);
+		printf("\n\n");
+	}
+	else
+	{
+		printf("Success\nExpected :\n");
+		if (calloc_memory_tested && calloc_memory_tester)
+			ft_print_memory((char *)calloc_memory_tester, nmemb * size);
+		else
+			printf("NULL");
+		printf("\nGot :\n");
+		if (calloc_memory_tested && calloc_memory_tester)
+			ft_print_memory((char *)calloc_memory_tested, nmemb * size);
+		else
+			printf("NULL");
+		printf("\n\n");
+		free(calloc_memory_tested);
+		free(calloc_memory_tester);
+	}
+	if (!res)
+		return (0);
+	return (1);
+}
+
+int	ft_calloc_tester()
+{
+	int	passed;
+
+	passed = 1;
+	
+	passed = ft_calloc_sub_tester(0, 0);
+	passed = ft_calloc_sub_tester(1, 1);
+	passed = ft_calloc_sub_tester(10, 10);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+void	ft_putchar_fd_sub_tester(int c, int fd)
+{
+	printf("Expected : \n");
+	printf("%c", c);
+	printf("\nGot: \n");
+	ft_putchar_fd(c, fd);
+	printf("\n\n");
+}
+
+void	ft_putchar_fd_tester(void)
+{
+	ft_putchar_fd_sub_tester((int)'a', 1);
+	ft_putchar_fd_sub_tester((int)'a', 0);
+	ft_putchar_fd_sub_tester((int)'0', 1);
+	ft_putchar_fd_sub_tester((int)155, 1);
+	ft_putchar_fd_sub_tester((int)-155, 1);
+	ft_putchar_fd_sub_tester((int)'z', 1);
+	ft_putchar_fd_sub_tester((int)'\n', 1);
+	ft_putchar_fd_sub_tester((int)'a', 2);
+	ft_putchar_fd_sub_tester((int)'0', 2);
+	ft_putchar_fd_sub_tester((int)155, 2);
+	ft_putchar_fd_sub_tester((int)-155, 2);
+	ft_putchar_fd_sub_tester((int)'z', 2);
+	ft_putchar_fd_sub_tester((int)'\n', 2);
+}
+
+void	ft_putstr_fd_sub_tester(char *s, int fd)
+{
+	printf("Expected : \n");
+	printf("%s", s);
+	printf("\nGot: \n");
+	ft_putstr_fd(s, fd);
+	printf("\n\n");
+}
+
+void	ft_putstr_fd_tester(void)
+{
+	ft_putstr_fd_sub_tester("Hello, World!", 1);
+	ft_putstr_fd_sub_tester("Hello, World!", 2);
+	ft_putstr_fd_sub_tester("Hello, World!", 0);
+	ft_putstr_fd_sub_tester("", 1);
+}
+
+void	ft_putendl_fd_sub_tester(char *s, int fd)
+{
+	printf("Expected : \n");
+	printf("%s\n", s);
+	printf("\nGot: \n");
+	ft_putendl_fd(s, fd);
+	printf("\n\n");
+}
+
+void	ft_putendl_fd_tester(void)
+{
+	ft_putendl_fd_sub_tester("Hello, World!", 1);
+	ft_putendl_fd_sub_tester("Hello, World!", 2);
+	ft_putendl_fd_sub_tester("Hello, World!", 0);
+	ft_putendl_fd_sub_tester("", 1);
+}
+
+void	ft_putnbr_fd_sub_tester(int n, int fd)
+{
+	printf("Expected : \n");
+	printf("%d", n);
+	printf("\nGot: \n");
+	ft_putnbr_fd(n, fd);
+	printf("\n\n");
+}
+
+void	ft_putnbr_fd_tester(void)
+{
+	ft_putnbr_fd_sub_tester(42, 1);
+	ft_putnbr_fd_sub_tester(0, 1);
+	ft_putnbr_fd_sub_tester(INT_MIN, 1);
+	ft_putnbr_fd_sub_tester(INT_MAX, 1);
+	ft_putnbr_fd_sub_tester(-123456, 1);
+	ft_putnbr_fd_sub_tester(123456, 1);
+	ft_putnbr_fd_sub_tester(42, 2);
+	ft_putnbr_fd_sub_tester(0, 2);
+	ft_putnbr_fd_sub_tester(INT_MIN, 2);
+	ft_putnbr_fd_sub_tester(INT_MAX, 2);
+	ft_putnbr_fd_sub_tester(-123456, 2);
+	ft_putnbr_fd_sub_tester(123456, 2);
+}
+
+
+void	ft_main_tester(char *ft_name, int *count)
 {
 	int	res;
 
+	res = 1;
 	printf("test %s :\n", ft_name);
 	if (strcmp(ft_name, "isalpha") == 0)
 		res = ft_ascii_tester(ft_isalpha, isalpha);
@@ -680,16 +988,45 @@ void	ft_main_tester(char *ft_name)
 		res = ft_strncmp_tester();
 	else if (strcmp(ft_name, "memchr") == 0)
 		res = ft_memchr_tester();
-	/*
 	else if (strcmp(ft_name, "memcmp") == 0)
-		res = ft_tester(ft_memcmp, memcmp);
+		res = ft_memcmp_tester();
 	else if (strcmp(ft_name, "strnstr") == 0)
-		res = ft_tester(ft_strnstr, strnstr);
+		res = ft_strnstr_tester();
 	else if (strcmp(ft_name, "atoi") == 0)
-		res = ft_tester(ft_atoi, atoi);
+		res = ft_atoi_tester();
+	else if (strcmp(ft_name, "calloc") == 0)
+		res = ft_calloc_tester();
+	/*
+	else if (strcmp(ft_name, "strdup") == 0)
+		res = ft_strdup_tester();
+	else if (strcmp(ft_name, "substr") == 0)
+		res = ft_substr_tester();
+	else if (strcmp(ft_name, "strjoin") == 0)
+		res = ft_strjoin_tester();
+	else if (strcmp(ft_name, "strtrim") == 0)
+		res = ft_strtrim_tester();
+	else if (strcmp(ft_name, "split") == 0)
+		res = ft_split_tester();
+	else if (strcmp(ft_name, "itoa") == 0)
+		res = ft_itoa_tester();
+	else if (strcmp(ft_name, "strmapi") == 0)
+		res = ft_strmapi_tester();
+	else if (strcmp(ft_name, "striteri") == 0)
+		res = ft_striteri_tester();
 	*/
+	else if (strcmp(ft_name, "putchar_fd") == 0)
+		ft_putchar_fd_tester();
+	else if (strcmp(ft_name, "putstr_fd") == 0)
+		ft_putstr_fd_tester();
+	else if (strcmp(ft_name, "putendl_fd") == 0)
+		ft_putendl_fd_tester();
+	else if (strcmp(ft_name, "putnbr_fd") == 0)
+		ft_putnbr_fd_tester();
 	if (res)
+	{
 		printf("SUCCESS\n");
+		*count = *count + 1;
+	}
 	else
 		printf("FAILED\n");
 	printf("test finished\n\n");
@@ -697,25 +1034,46 @@ void	ft_main_tester(char *ft_name)
 
 int	main(void)
 {
-	ft_main_tester("isalpha");
-	ft_main_tester("isdigit");
-	ft_main_tester("isalnum");
-	ft_main_tester("isascii");
-	ft_main_tester("isprint");
-	ft_main_tester("strlen");
-	ft_main_tester("memset");
-	ft_main_tester("bzero");
-	ft_main_tester("memcpy");
-	ft_main_tester("memmove");
-	ft_main_tester("strlcpy");
-	ft_main_tester("strlcat");
-	ft_main_tester("toupper");
-	ft_main_tester("tolower");
-	ft_main_tester("strchr");
-	ft_main_tester("strrchr");
-	ft_main_tester("strncmp");
-	ft_main_tester("memchr");
-	//ft_main_tester("memcmp");
-	//ft_main_tester("strnstr");
-	//ft_main_tester("atoi");
+	int	count;
+
+	count = 0;
+	/*
+	ft_main_tester("isalpha", &count);
+	ft_main_tester("isdigit", &count);
+	ft_main_tester("isalnum", &count);
+	ft_main_tester("isascii", &count);
+	ft_main_tester("isprint", &count);
+	ft_main_tester("strlen", &count);
+	ft_main_tester("memset", &count);
+	ft_main_tester("bzero", &count);
+	ft_main_tester("memcpy", &count);
+	ft_main_tester("memmove", &count);
+	ft_main_tester("strlcpy", &count);
+	ft_main_tester("strlcat", &count);
+	ft_main_tester("toupper", &count);
+	ft_main_tester("tolower", &count);
+	ft_main_tester("strchr", &count);
+	ft_main_tester("strrchr", &count);
+	ft_main_tester("strncmp", &count);
+	ft_main_tester("memchr", &count);
+	ft_main_tester("memcmp", &count);
+	ft_main_tester("strnstr", &count);
+	ft_main_tester("atoi", &count);
+	ft_main_tester("calloc", &count);
+	*/
+
+	//ft_main_tester("strdup", &count);
+	//ft_main_tester("substr", &count);
+	//ft_main_tester("strjoin", &count);
+	//ft_main_tester("strtrim", &count);
+	//ft_main_tester("split", &count);
+	//ft_main_tester("itoa", &count);
+	//ft_main_tester("strmapi", &count);
+	//ft_main_tester("striteri", &count);
+
+	//ft_main_tester("putchar_fd", &count);
+	//ft_main_tester("putstr_fd", &count);
+	//ft_main_tester("putendl_fd", &count);
+	//ft_main_tester("putnbr_fd", &count);
+	//printf("%d/30 tests passed with SUCCESS !\n", count);
 }

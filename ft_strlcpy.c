@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:23:29 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 15:39:35 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/07 06:56:08 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // of the string they tried to create
 // That means the length of src
 // While this may seem somewhat confusing,
-// it was done to make truncation detection simple
+// it was done to make truncation detection simple.
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;

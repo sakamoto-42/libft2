@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:12:07 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 09:12:08 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/07 08:48:44 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,18 @@
 // If little occurs nowhere in big, NULL is returned;
 // Otherwise, a pointer to the first character
 // of the first occurrence of little is returned
-
-/*
-EXAMPLES
-       The  following  sets  the pointer ptr to NULL, because only the first 4
-       characters of largestring are searched:
-
-             const char *largestring = "Foo Bar Baz";
-             const char *smallstring = "Bar";
-             char *ptr;
-
-             ptr = strnstr(largestring, smallstring, 4);
-*/
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	(void) big;
-	(void) little;
-	(void) len;
+	size_t	little_len;
+
+	little_len = ft_strlen(little);
+	if (!little)
+		return ((char *)big);
+	while (*big && len--)
+	{
+		if (ft_strncmp(big, little, little_len) == 0)
+			return ((char *)big);
+		big++;
+	}
 	return (NULL);
 }

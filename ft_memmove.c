@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:56:59 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 15:40:40 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/06 09:09:25 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // DESCRIPTION :
 // The ft_memmove() function copies n bytes from memory area src
-// to memory area dest
+// to memory area dest.
 // The memory areas may overlap: copying takes place as though
 // the bytes in src are first copied into a temporary array that does not
 // overlap src or dest, and the bytes are then copied from the temporary

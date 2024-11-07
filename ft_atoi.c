@@ -3,12 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:05:42 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 18:04:43 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/07 06:42:38 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
+// checks for white-space characters.
+// In "C" these are: space, form-feed ('\f'), newline ('\n'),
+// carriage return ('\r'), horizontal tab  ('\t'), 
+// and  vertical tab ('\v')
+static int	ft_isspace(int c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
 
 // convert a string to an integer
 
@@ -30,6 +41,23 @@
 // unless the value would underflow or overflow.
 int	ft_atoi(const char *nptr)
 {
-	(void) nptr;
-	return (0);
+	int	result;
+	int	sign;
+
+	result = 0;
+	sign = 1;
+	while (ft_isspace((int)*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
+	}
+	while (ft_isdigit((int)*nptr))
+	{
+		result = (result * 10) + ((int)(*nptr) - 48);
+		nptr++;
+	}
+	return (sign * result);
 }

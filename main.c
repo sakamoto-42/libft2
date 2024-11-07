@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 11:18:29 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:44:26 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -851,10 +851,152 @@ int	ft_calloc_tester()
 	int	passed;
 
 	passed = 1;
-	
 	passed = ft_calloc_sub_tester(0, 0);
 	passed = ft_calloc_sub_tester(1, 1);
 	passed = ft_calloc_sub_tester(10, 10);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_strdup_sub_tester(char *s)
+{
+	char	*strdup_dup_tested;
+	char	*strdup_dup_tester;
+
+	strdup_dup_tested = ft_strdup(s);
+	strdup_dup_tester = strdup(s);
+	if (((strdup_dup_tested && strdup_dup_tester) && strcmp(strdup_dup_tested, strdup_dup_tester) != 0)
+		|| (strdup_dup_tested == NULL && strdup_dup_tester != NULL)
+		|| (strdup_dup_tested != NULL && strdup_dup_tester == NULL))
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", strdup_dup_tester, strdup_dup_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", strdup_dup_tester, strdup_dup_tested);
+		return (1);
+	}
+}
+
+int	ft_strdup_tester()
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strdup_sub_tester("");
+	passed = ft_strdup_sub_tester("Hello, world!");
+	passed = ft_strdup_sub_tester("Coucou 42");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_substr_sub_tester(char const *s, unsigned int start, size_t len, char *expected)
+{
+	char	*substr_sub_tested;
+
+	substr_sub_tested = ft_substr(s, start, len);
+	if (substr_sub_tested == NULL)
+		substr_sub_tested = "NULL";
+	if (strcmp(substr_sub_tested, expected) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", expected, substr_sub_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", expected, substr_sub_tested);
+		return (1);
+	}
+	return (1);
+}
+
+int	ft_substr_tester()
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_substr_sub_tester("", 0, 0, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 0, 0, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 7, 6, "");
+	passed = ft_substr_sub_tester("Hello, world!", 7, 0, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 0, 5, "Hello");
+	passed = ft_substr_sub_tester("Hello, world!", 15, 5, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 7, 20, "world!");
+	passed = ft_substr_sub_tester("Hello, world!", 0, 20, "Hello, world!");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_strjoin_sub_tester(char const *s1, char const *s2, char *expected)
+{
+	char	*subjoin_tested;
+
+	subjoin_tested = ft_strjoin(s1, s2);
+	if (subjoin_tested == NULL)
+		subjoin_tested = "NULL";
+	if (strcmp(subjoin_tested, expected) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", expected, subjoin_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", expected, subjoin_tested);
+		return (1);
+	}
+	return (1);
+}
+
+int	ft_strjoin_tester()
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strjoin_sub_tester("", "", "");
+	passed = ft_strjoin_sub_tester("Hello", "", "Hello");
+	passed = ft_strjoin_sub_tester("", "world", "world");
+	passed = ft_strjoin_sub_tester("Hello", ", world!", "Hello, world!");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_strtrim_sub_tester(char const *s1, char const *set, char *expected)
+{
+	char	*subtrim_tested;
+
+	subtrim_tested = ft_strtrim(s1, set);
+	if (subtrim_tested == NULL)
+		subtrim_tested = "NULL";
+	if (strcmp(subtrim_tested, expected) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", expected, subtrim_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", expected, subtrim_tested);
+		return (1);
+	}
+	//free(subtrim_tested);
+}
+
+int	ft_strtrim_tester()
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strtrim_sub_tester("", "", "");
+	passed = ft_strtrim_sub_tester("+-+-", "+-", "");
+	passed = ft_strtrim_sub_tester("+Hello+", "+", "Hello");
+	passed = ft_strtrim_sub_tester("+-Hello+-", "+-", "Hello");
+	passed = ft_strtrim_sub_tester("+-Hello+-", "-+", "Hello");
+	passed = ft_strtrim_sub_tester("*Hello*", "-+", "*Hello*");
+	passed = ft_strtrim_sub_tester("+-+Hel-+-lo-+-", "-+", "Hel-+-lo");
 	if (!passed)
 		return (0);
 	return (1);
@@ -945,7 +1087,6 @@ void	ft_putnbr_fd_tester(void)
 	ft_putnbr_fd_sub_tester(123456, 2);
 }
 
-
 void	ft_main_tester(char *ft_name, int *count)
 {
 	int	res;
@@ -996,7 +1137,6 @@ void	ft_main_tester(char *ft_name, int *count)
 		res = ft_atoi_tester();
 	else if (strcmp(ft_name, "calloc") == 0)
 		res = ft_calloc_tester();
-	/*
 	else if (strcmp(ft_name, "strdup") == 0)
 		res = ft_strdup_tester();
 	else if (strcmp(ft_name, "substr") == 0)
@@ -1005,6 +1145,7 @@ void	ft_main_tester(char *ft_name, int *count)
 		res = ft_strjoin_tester();
 	else if (strcmp(ft_name, "strtrim") == 0)
 		res = ft_strtrim_tester();
+	/*
 	else if (strcmp(ft_name, "split") == 0)
 		res = ft_split_tester();
 	else if (strcmp(ft_name, "itoa") == 0)
@@ -1060,12 +1201,11 @@ int	main(void)
 	ft_main_tester("strnstr", &count);
 	ft_main_tester("atoi", &count);
 	ft_main_tester("calloc", &count);
+	ft_main_tester("strdup", &count);
+	ft_main_tester("substr", &count);
 	*/
-
-	//ft_main_tester("strdup", &count);
-	//ft_main_tester("substr", &count);
 	//ft_main_tester("strjoin", &count);
-	//ft_main_tester("strtrim", &count);
+	ft_main_tester("strtrim", &count);
 	//ft_main_tester("split", &count);
 	//ft_main_tester("itoa", &count);
 	//ft_main_tester("strmapi", &count);
@@ -1075,5 +1215,5 @@ int	main(void)
 	//ft_main_tester("putstr_fd", &count);
 	//ft_main_tester("putendl_fd", &count);
 	//ft_main_tester("putnbr_fd", &count);
-	//printf("%d/30 tests passed with SUCCESS !\n", count);
+	printf("%d/30 tests passed with SUCCESS !\n", count);
 }

@@ -6,9 +6,12 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:58:53 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 09:00:17 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:47:16 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+#include <stdlib.h>
 
 // Paramètres :
 // s1: La chaîne de caractères préfixe.
@@ -22,5 +25,16 @@
 // chaîne, résultat de la concaténation de s1 et s2.
 char *ft_strjoin(char const *s1, char const *s2)
 {
-	
+	size_t	s1_len;
+	size_t	size;
+	char	*joined_str;
+
+	s1_len = ft_strlen(s1);
+	size = s1_len + ft_strlen(s2);
+	joined_str = (char *) malloc((size + 1) * sizeof(char));
+	if (!joined_str)
+		return (NULL);
+	ft_strlcpy(joined_str, s1, s1_len + 1);
+	ft_strlcat(joined_str, s2, size + 1);
+	return (joined_str);
 }

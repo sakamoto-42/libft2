@@ -6,9 +6,12 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:51:59 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 08:56:22 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:57:02 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+#include <stdlib.h>
 
 // duplicate a string
 
@@ -24,7 +27,15 @@
 
 // ERRORS :
 // ENOMEM Insufficient memory available to allocate duplicate string.
-char	*strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-	
+	size_t	str_len;
+	char	*dup;
+
+	str_len = ft_strlen(s);
+	dup = (char *) malloc((str_len + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s, str_len + 1);
+	return (dup);
 }

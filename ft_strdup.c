@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:51:59 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 18:58:08 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:13:38 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 // Memory for the new string is obtained with malloc, and can be freed with free
 
 // RETURN VALUE :
-// On success, the ft_strdup() function returns
-// a pointer to the duplicated string
+// On success, the ft_strdup() function returns a pointer
+// to the duplicated string
 // It returns NULL if insufficient memory was available,
 // with errno set to indicate the cause of the error
 

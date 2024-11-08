@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:43:26 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 18:56:55 by julien           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:12:16 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // The ft_calloc() function allocates memory for an array of nmemb elements
 // of size bytes each and returns a pointer to the allocated memory.
 // The memory is set to zero.
-// If nmemb or size is 0, then ft_calloc() returns either NULL,
+// If nmemb or size is 0, then ft_calloc() returns either NULL, 
 // or a unique pointer value that can later be
 // successfully passed to free()
 // If the multiplication of nmemb and size would result in integer overflow,
@@ -39,7 +39,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*memory;
 
-	if (nmemb == 0 || size == 0)
+	if (!nmemb || !size)
 	{
 		nmemb = 1;
 		size = 1;

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:12:07 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/08 09:05:35 by sakamoto-42      ###   ########.fr       */
+/*   Updated: 2024/11/08 09:16:57 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	little_len;
 
-	if (!*=little)
+	if (!little)
 		return ((char *)big);
 	little_len = ft_strlen(little);
-		while (*big && len--)
+	while (*big && len--)
 	{
 		if (ft_strncmp(big, little, little_len) == 0)
 			return ((char *)big);

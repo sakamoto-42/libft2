@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 17:44:26 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:43:31 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1002,6 +1002,67 @@ int	ft_strtrim_tester()
 	return (1);
 }
 
+int	ft_split_sub_tester(char const *s, char c, char *expected)
+{
+	char	**split_tested;
+	size_t	i;
+
+	split_tested = ft_split(s, c);
+	i = 0;
+	printf("\nExpected :\n%s\n", expected);
+	printf("\nGot :\n");
+	while (split_tested[i])
+	{
+		printf("%s\n", split_tested[i]);
+		i++;
+	}
+	printf("\n");
+	return (1);
+}
+
+int	ft_split_tester()
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_split_sub_tester("Hello-world", '-', "Hello\nworld");
+	passed = ft_split_sub_tester("--------Hello", '-', "Hello");
+	passed = ft_split_sub_tester("-Hello-", '+', "-Hello-");
+	passed = ft_split_sub_tester("Hello, world!", '+', "Hello, world!");
+	passed = ft_split_sub_tester(" Hello world ", ' ', "Hello\nworld");
+	passed = ft_split_sub_tester("Hello world!", '!', "Hello world");
+	passed = ft_split_sub_tester("*Hello*+*world*", '+', "*Hello*\n*world*");
+	passed = ft_split_sub_tester("+-+Hel-+-lo-+-", '-', "+\n+Hel\n+\nlo\n+");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_itoa_sub_tester(int n)
+{
+	printf("\nExpected :\n%d\n", n);
+	printf("\nGot :\n%s\n", ft_itoa(n));
+	printf("\n");
+	return (1);
+}
+
+int	ft_itoa_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_itoa_sub_tester(-42);
+	passed = ft_itoa_sub_tester(0);
+	passed = ft_itoa_sub_tester(42);
+	passed = ft_itoa_sub_tester(1);
+	passed = ft_itoa_sub_tester(-1);
+	passed = ft_itoa_sub_tester(INT_MIN);
+	passed = ft_itoa_sub_tester(INT_MAX);
+	if (!passed)
+		return (0);
+	return (1);
+}
+
 void	ft_putchar_fd_sub_tester(int c, int fd)
 {
 	printf("Expected : \n");
@@ -1145,11 +1206,11 @@ void	ft_main_tester(char *ft_name, int *count)
 		res = ft_strjoin_tester();
 	else if (strcmp(ft_name, "strtrim") == 0)
 		res = ft_strtrim_tester();
-	/*
 	else if (strcmp(ft_name, "split") == 0)
 		res = ft_split_tester();
 	else if (strcmp(ft_name, "itoa") == 0)
 		res = ft_itoa_tester();
+	/*
 	else if (strcmp(ft_name, "strmapi") == 0)
 		res = ft_strmapi_tester();
 	else if (strcmp(ft_name, "striteri") == 0)
@@ -1205,9 +1266,9 @@ int	main(void)
 	ft_main_tester("substr", &count);
 	*/
 	//ft_main_tester("strjoin", &count);
-	ft_main_tester("strtrim", &count);
+	//ft_main_tester("strtrim", &count);
 	//ft_main_tester("split", &count);
-	//ft_main_tester("itoa", &count);
+	ft_main_tester("itoa", &count);
 	//ft_main_tester("strmapi", &count);
 	//ft_main_tester("striteri", &count);
 

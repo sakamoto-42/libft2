@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:56:54 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/08 08:57:19 by sakamoto-42      ###   ########.fr       */
+/*   Updated: 2024/11/08 09:17:58 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // issue de la chaîne ’s’.
 // Cette nouvelle chaîne commence à l’index ’start’ et
 // a pour taille maximale ’len’.
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	s_len;
 	size_t	size;

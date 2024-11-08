@@ -37,11 +37,15 @@ char *ft_strtrim(char const *s1, char const *set)
 	if (!(*s1_start))
 	{
 		trimmed_str = ft_strdup("");
+  if (!trimmed_str)
+     return (NULL);
 		return (trimmed_str);
 	}
 	s1_end = (char *)(s1 + (ft_strlen(s1)));
 	while (s1_end > s1_start && ft_strchr(set, *s1_end))
 		s1_end--;
 	trimmed_str = ft_substr(s1, s1_start - s1, (size_t)(s1_end - s1_start));
+  if (!trimmed_str)
+     return (NULL);
 	return (trimmed_str);
 }

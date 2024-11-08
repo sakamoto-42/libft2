@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:11:29 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 10:28:35 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/08 08:55:13 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // respectively, to be less than, to match, or be greater than s2
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while (n--)
+	while (((unsigned char) *s1 || (unsigned char) *s2) && n--)
 	{
 		if ((unsigned char) *s1 != (unsigned char) *s2)
 			return ((unsigned char)*s1 - (unsigned char)*s2);

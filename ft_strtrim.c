@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:01:10 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 06:31:27 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:32:17 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // NULL si l’allocation échoue.
 
 // Description :
-// Alloue (avec malloc(3)) et retourne une copie de
+// Alloue (avec malloc) et retourne une copie de
 // la chaîne ’s1’, sans les caractères spécifiés
 // dans ’set’ au début et à la fin de la chaîne de
 // caractères.

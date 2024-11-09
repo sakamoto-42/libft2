@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:56:54 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 06:25:46 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:32:10 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // NULL si l’allocation échoue.
 
 // Description :
-// Alloue (avec malloc(3)) et retourne une chaîne de caractères
+// Alloue (avec malloc) et retourne une chaîne de caractères
 // issue de la chaîne ’s’.
 // Cette nouvelle chaîne commence à l’index ’start’ et
 // a pour taille maximale ’len’.

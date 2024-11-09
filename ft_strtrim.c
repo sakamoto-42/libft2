@@ -35,6 +35,7 @@ char *ft_strtrim(char const *s1, char const *set)
 	if (*s1 == '\0')
 	{
 		trimmed_str = ft_strdup("");
+<<<<<<< HEAD
 		if (!trimmed_str)
 			return (NULL);
 		return (trimmed_str);
@@ -47,5 +48,17 @@ char *ft_strtrim(char const *s1, char const *set)
 	trimmed_str = ft_substr(s1, 0, (size_t)(s1_end - s1));
 	if (!trimmed_str)
 		return (NULL);
+=======
+  if (!trimmed_str)
+     return (NULL);
+		return (trimmed_str);
+	}
+	s1_end = (char *)(s1 + (ft_strlen(s1)));
+	while (s1_end > s1_start && ft_strchr(set, *s1_end))
+		s1_end--;
+	trimmed_str = ft_substr(s1, s1_start - s1, (size_t)(s1_end - s1_start));
+  if (!trimmed_str)
+     return (NULL);
+>>>>>>> d05873f544e24376685dcad26048377493bfeb7d
 	return (trimmed_str);
 }

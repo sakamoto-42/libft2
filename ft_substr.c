@@ -34,6 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	s_len = ft_strlen(s);
 	if (start >= s_len)
+<<<<<<< HEAD
 	{
 		sub = ft_strdup("");
 		if (!sub)
@@ -42,6 +43,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	if (len > s_len - start)
 		len = s_len - start;
+=======
+		return (NULL);
+     if (len > s_len - start)
+	        len = len - start;
+>>>>>>> d05873f544e24376685dcad26048377493bfeb7d
 	sub = (char *) malloc((len + 1) + sizeof(char));
 	if (!sub)
 		return (NULL);

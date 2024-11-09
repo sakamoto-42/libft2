@@ -6,9 +6,12 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:05:42 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/07 09:07:08 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 07:59:53 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include "libft.h"
 
 // Paramètres :
 // s: La chaîne de caractères sur laquelle itérer.
@@ -25,7 +28,22 @@
 // comme second argument. Une nouvelle chaîne de
 // caractères est créée (avec malloc(3)), résultant
 // des applications successives de ’f’.
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	
+	char	*str;
+	size_t	s_len;
+	size_t	i;
+
+	s_len = ft_strlen(s);
+	str = malloc((s_len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

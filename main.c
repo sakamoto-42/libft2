@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 05:29:49 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 09:06:41 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -774,6 +774,7 @@ int	ft_strnstr_tester(void)
 	passed = ft_strnstr_sub_tester("Hello, world!", "world!", 13);
 	passed = ft_strnstr_sub_tester("Hello, world ; Hello, world!", "Hello", 28);
 	passed = ft_strnstr_sub_tester("Hello, world!", "world", 50);
+	passed = ft_strnstr_sub_tester("babababu", "bababu", 20);
 	passed = ft_strnstr_sub_tester("", "Hello", 5);
 	passed = ft_strnstr_sub_tester("Hello", "", 5);
 	if (!passed)
@@ -1065,6 +1066,129 @@ int	ft_itoa_tester(void)
 	return (1);
 }
 
+char	ft_roti(unsigned int i, char c)
+{
+	int	alpha;
+
+	if (c >= 'a' && c <= 'z')
+		alpha = 97;
+	else if (c >= 'Z' && c <= 'Z')
+		alpha = 65;
+	return ((c + i - alpha) % 25 + alpha);
+}
+
+char	ft_even_converter_char(unsigned int i, char c)
+{
+	if (i % 2)
+	{
+		if (c >= 'a' && c <= 'z')
+			c -= 32;
+	}
+	else
+	{
+		if (c >= 'A' && c <= 'Z')
+			c += 32;
+	}
+	return (c);
+}
+
+char	ft_toupper_char(unsigned int i, char c)
+{
+	(void) i;
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}
+
+char	ft_tolower_char(unsigned int i, char c)
+{
+	(void) i;
+	{
+		if (c >= 'A' && c <= 'Z')
+			c += 32;
+	}
+	return (c);
+}
+
+int	ft_strmapi_sub_tester(char const *s, char (*f)(unsigned int, char), char *expected)
+{
+	char	*str_tested;
+
+	str_tested = ft_strmapi(s, f);
+	if (str_tested == NULL)
+		str_tested = "NULL";
+	if (strcmp(str_tested, expected) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", expected, str_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", expected, str_tested);
+		return (1);
+	}
+	//free(str_tested);
+}
+
+int	ft_strmapi_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_strmapi_sub_tester("bonjour", ft_roti, "bppmsax");
+	passed = ft_strmapi_sub_tester("bonjour", ft_even_converter_char, "bOnJoUr");
+	passed = ft_strmapi_sub_tester("bonjour", ft_toupper_char, "BONJOUR");
+	passed = ft_strmapi_sub_tester("BONJOUR", ft_tolower_char, "bonjour");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+void	ft_toupper_str(unsigned int i, char *str)
+{
+	(void) i;
+	if (*str >= 'a' && *str <= 'z')
+		*str -= 32;
+}
+
+void	ft_tolower_str(unsigned int i, char *str)
+{
+	(void) i;
+	if (*str >= 'A' && *str <= 'Z')
+		*str += 32;
+}
+
+int	ft_striteri_sub_tester(char *s, void (*f)(unsigned int, char*), char *expected)
+{
+	char	*striteri_dest_tested;
+
+	striteri_dest_tested = ft_src_init(s, ft_strlen(s));
+	ft_striteri(striteri_dest_tested, f);
+	if (strcmp(striteri_dest_tested, expected) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", expected, striteri_dest_tested);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected : %s\nGot: %s\n\n", expected, striteri_dest_tested);
+		return (1);
+	}
+	free(striteri_dest_tested);
+}
+
+int	ft_striteri_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_striteri_sub_tester("bonjour", ft_toupper_str, "BONJOUR");
+	passed = ft_striteri_sub_tester("BONJOUR", ft_tolower_str, "bonjour");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
 void	ft_putchar_fd_sub_tester(int c, int fd)
 {
 	printf("Expected : \n");
@@ -1212,12 +1336,10 @@ void	ft_main_tester(char *ft_name, int *count)
 		res = ft_split_tester();
 	else if (strcmp(ft_name, "itoa") == 0)
 		res = ft_itoa_tester();
-	/*
 	else if (strcmp(ft_name, "strmapi") == 0)
 		res = ft_strmapi_tester();
 	else if (strcmp(ft_name, "striteri") == 0)
 		res = ft_striteri_tester();
-	*/
 	else if (strcmp(ft_name, "putchar_fd") == 0)
 		ft_putchar_fd_tester();
 	else if (strcmp(ft_name, "putstr_fd") == 0)
@@ -1241,7 +1363,6 @@ int	main(void)
 	int	count;
 
 	count = 0;
-	/*
 	ft_main_tester("isalpha", &count);
 	ft_main_tester("isdigit", &count);
 	ft_main_tester("isalnum", &count);
@@ -1266,17 +1387,15 @@ int	main(void)
 	ft_main_tester("calloc", &count);
 	ft_main_tester("strdup", &count);
 	ft_main_tester("substr", &count);
-	*/
-	//ft_main_tester("strjoin", &count);
+	ft_main_tester("strjoin", &count);
 	ft_main_tester("strtrim", &count);
-	//ft_main_tester("split", &count);
-	//ft_main_tester("itoa", &count);
-	//ft_main_tester("strmapi", &count);
-	//ft_main_tester("striteri", &count);
-
-	//ft_main_tester("putchar_fd", &count);
-	//ft_main_tester("putstr_fd", &count);
-	//ft_main_tester("putendl_fd", &count);
-	//ft_main_tester("putnbr_fd", &count);
-	printf("%d/30 tests passed with SUCCESS !\n", count);
+	ft_main_tester("split", &count);
+	ft_main_tester("itoa", &count);
+	ft_main_tester("strmapi", &count);
+	ft_main_tester("striteri", &count);
+	ft_main_tester("putchar_fd", &count);
+	ft_main_tester("putstr_fd", &count);
+	ft_main_tester("putendl_fd", &count);
+	ft_main_tester("putnbr_fd", &count);
+	printf("%d/34 tests passed with SUCCESS !\n", count);
 }

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:02:33 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/08 11:24:39 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 04:23:15 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*ft_extract_word(const char *start, const char *end)
 		*dest++ = *start++;
 	*dest = '\0';
 	return (word);
-} 
+}
 
 // Paramètres :
 // s: La chaîne de caractères à découper.
@@ -77,7 +77,7 @@ static char	*ft_extract_word(const char *start, const char *end)
 // de chaînes de caractères obtenu en séparant ’s’ à
 // l’aide du caractère ’c’, utilisé comme délimiteur.
 // Le tableau doit être terminé par NULL.
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t		word_count;
 	char		**splitted_strs;

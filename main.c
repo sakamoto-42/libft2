@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/08 14:43:31 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 05:29:49 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -918,14 +918,16 @@ int	ft_substr_tester()
 	int	passed;
 
 	passed = 1;
-	passed = ft_substr_sub_tester("", 0, 0, "NULL");
-	passed = ft_substr_sub_tester("Hello, world!", 0, 0, "NULL");
+	passed = ft_substr_sub_tester("", 0, 0, "");
+	passed = ft_substr_sub_tester("Hello, world!", 0, 0, "");
 	passed = ft_substr_sub_tester("Hello, world!", 7, 6, "");
-	passed = ft_substr_sub_tester("Hello, world!", 7, 0, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 7, 0, "");
 	passed = ft_substr_sub_tester("Hello, world!", 0, 5, "Hello");
-	passed = ft_substr_sub_tester("Hello, world!", 15, 5, "NULL");
+	passed = ft_substr_sub_tester("Hello, world!", 15, 5, "");
 	passed = ft_substr_sub_tester("Hello, world!", 7, 20, "world!");
 	passed = ft_substr_sub_tester("Hello, world!", 0, 20, "Hello, world!");
+	passed = ft_substr_sub_tester("Hello, world!", 20, 0, "");
+	passed = ft_substr_sub_tester("Hello, world!", 20, 20, "");
 	if (!passed)
 		return (0);
 	return (1);
@@ -1266,9 +1268,9 @@ int	main(void)
 	ft_main_tester("substr", &count);
 	*/
 	//ft_main_tester("strjoin", &count);
-	//ft_main_tester("strtrim", &count);
+	ft_main_tester("strtrim", &count);
 	//ft_main_tester("split", &count);
-	ft_main_tester("itoa", &count);
+	//ft_main_tester("itoa", &count);
 	//ft_main_tester("strmapi", &count);
 	//ft_main_tester("striteri", &count);
 

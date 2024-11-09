@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:56:54 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/08 09:17:58 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 05:12:15 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,24 @@
 // issue de la chaîne ’s’.
 // Cette nouvelle chaîne commence à l’index ’start’ et
 // a pour taille maximale ’len’.
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	s_len;
-	size_t	size;
 	char	*sub;
 
 	s_len = ft_strlen(s);
-	if (start >= s_len || len == 0)
-		return (NULL);
-	size = len - start;
-	sub = (char *) malloc((size + 1) + sizeof(char));
+	if (start >= s_len)
+	{
+		sub = ft_strdup("");
+		if (!sub)
+			return (NULL);
+		return (sub);
+	}
+	if (len > s_len - start)
+		len = s_len - start;
+	sub = (char *) malloc((len + 1) + sizeof(char));
 	if (!sub)
 		return (NULL);
-	ft_strlcpy(sub, s + start, size + 1);
+	ft_strlcpy(sub, s + start, len + 1);
 	return (sub);
 }

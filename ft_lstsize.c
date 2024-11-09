@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:23:24 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:09:03 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,15 @@
 // Compte le nombre d’éléments de la liste.
 int	ft_lstsize(t_list *lst)
 {
-	
+	int		count;
+	t_list	*current;
+
+	count = 0;
+	current = lst;
+	while (current)
+	{
+		current = current->next;
+		count++;	
+	}
+	return (count);
 }

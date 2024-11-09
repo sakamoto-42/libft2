@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:25:35 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:13:00 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 // Valeur de retour :
 // Aucune
 
-// Description Libère la mémoire de l’élément passé en argument
+// Description :
+// Libère la mémoire de l’élément passé en argument
 // en utilisant la fonction ’del’ puis avec free.
 // La mémoire de ’next’ ne doit pas être free.
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-
+	
 }

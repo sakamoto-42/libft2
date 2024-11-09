@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:24:53 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:50:32 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:12:23 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,15 @@
 // Ajoute l’élément ’new’ à la fin de la liste.
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	return ;
+	t_list	*last;
+
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		last = ft_lstlast(*lst);
+		last->next = new;
+	}
 }

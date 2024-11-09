@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:20:53 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 11:28:10 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:06:24 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 // La variable ’next’ est initialisée à NULL.
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*new_node;
+	t_list	*new_elem;
 
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
+	new_elem = (t_list *) malloc(sizeof(t_list));
+	if (!new_elem)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	new_elem->content = content;
+	new_elem->next = NULL;
+	return (new_elem);
 }

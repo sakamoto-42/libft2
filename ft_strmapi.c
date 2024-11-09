@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:05:42 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 09:13:56 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:45:30 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	i;
 
 	s_len = ft_strlen(s);
-	str = malloc((s_len + 1) * sizeof(char));
+	str = (char *) malloc((s_len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;

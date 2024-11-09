@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:43:26 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:01:38 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:46:25 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*memory;
 
-	memory = malloc(nmemb * size);
+	memory = (void *) malloc(nmemb * size);
 	if (!memory)
 		return (NULL);
 	ft_bzero(memory, nmemb * size);

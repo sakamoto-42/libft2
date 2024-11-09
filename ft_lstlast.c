@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:24:05 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:11:00 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@
 // Renvoie le dernier élément de la liste.
 t_list	*ft_lstlast(t_list *lst)
 {
-	
+	if (!lst)
+		return (NULL);
+	while (lst)
+		lst = lst->next;
+	return (lst);
 }

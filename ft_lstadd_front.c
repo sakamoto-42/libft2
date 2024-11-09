@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:22:19 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:16:02 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@
 // Ajoute l’élément ’new’ au début de la liste.
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:56:59 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 09:09:25 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 06:28:23 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,24 @@
 // The ft_memmove() function returns a pointer to dest
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char		*dest_start_ptr;
-	unsigned char		*dest_end_ptr;
-	const unsigned char	*src_start_ptr;
-	const unsigned char	*src_end_ptr;
+	unsigned char		*dest_ptr;
+	const unsigned char	*src_ptr;
 
 	if (!dest && !src)
 		return (NULL);
-	dest_start_ptr = (unsigned char *) dest;
-	dest_end_ptr = ((unsigned char *) dest) + n - 1;
-	src_start_ptr = (unsigned char *) src;
-	src_end_ptr = ((unsigned char *) src) + n - 1;
-	if (src_start_ptr > dest_start_ptr)
+	dest_ptr = (unsigned char *) dest;
+	src_ptr = (unsigned char *) src;
+	if (src_ptr < dest_ptr)
 	{
+		dest_ptr += n;
+		src_ptr += n;
 		while (n--)
-			*dest_start_ptr++ = *src_start_ptr++;
+			*(--dest_ptr) = *(--src_ptr);
 	}
 	else
 	{
 		while (n--)
-			*dest_end_ptr-- = *src_end_ptr--;
+			*dest_ptr++ = *src_ptr++;
 	}
 	return (dest);
 }

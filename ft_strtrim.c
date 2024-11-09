@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:01:10 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 05:31:45 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 06:31:27 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // la chaîne ’s1’, sans les caractères spécifiés
 // dans ’set’ au début et à la fin de la chaîne de
 // caractères.
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char const	*s1_end;
 	char		*trimmed_str;
@@ -35,7 +35,6 @@ char *ft_strtrim(char const *s1, char const *set)
 	if (*s1 == '\0')
 	{
 		trimmed_str = ft_strdup("");
-<<<<<<< HEAD
 		if (!trimmed_str)
 			return (NULL);
 		return (trimmed_str);
@@ -48,17 +47,5 @@ char *ft_strtrim(char const *s1, char const *set)
 	trimmed_str = ft_substr(s1, 0, (size_t)(s1_end - s1));
 	if (!trimmed_str)
 		return (NULL);
-=======
-  if (!trimmed_str)
-     return (NULL);
-		return (trimmed_str);
-	}
-	s1_end = (char *)(s1 + (ft_strlen(s1)));
-	while (s1_end > s1_start && ft_strchr(set, *s1_end))
-		s1_end--;
-	trimmed_str = ft_substr(s1, s1_start - s1, (size_t)(s1_end - s1_start));
-  if (!trimmed_str)
-     return (NULL);
->>>>>>> d05873f544e24376685dcad26048377493bfeb7d
 	return (trimmed_str);
 }

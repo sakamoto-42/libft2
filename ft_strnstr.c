@@ -29,15 +29,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	little_len;
 
-<<<<<<< HEAD
-=======
- big_start = big;
->>>>>>> d05873f544e24376685dcad26048377493bfeb7d
 	if (!*little)
 		return ((char *)big);
 	little_len = ft_strlen(little);
- if (len > big_len)
- len = big_len;
 	while (*big && len--)
 	{
 		if (ft_strncmp(big, little, little_len) == 0)

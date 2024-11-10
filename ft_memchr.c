@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:07:41 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/06 09:07:49 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:39:02 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 // RETURN VALUE :
 // The ft_memchr() function return a pointer to the matching
 // byte or NULL if the character does not occur in the given memory area
-
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*s_ptr;

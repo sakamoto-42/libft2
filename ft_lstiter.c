@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:27:36 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:58:07 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,11 @@
 // et applique la fonction ’f’ au contenu chaque élément.
 void ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:29:53 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:38:48 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,24 @@
 // La fonction ’del’ est là pour détruire le contenu d’un élément si nécessaire.
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
+	t_list	*current;
+	t_list	*new_node;
+	t_list	*new_lst;
 
+	if (!lst || !f || !del)
+		return (NULL);
+	current = lst;
+	new_lst = NULL;
+	while (current)
+	{
+		new_node = ft_lstnew(f(current->content));
+		if (!new_node)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_node);
+		current = current->next;
+	}
+	return (new_lst);
 }

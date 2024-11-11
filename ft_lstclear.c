@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:26:45 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 10:48:47 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:16:03 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,23 @@
 
 // Description :
 // Supprime et libère la mémoire de l’élément passé en
-// paramètre, et de tous les éléments qui suivent, 
+// paramètre, et de tous les éléments qui suivent,
 // à l’aide de ’del’ et de free
 // Enfin, le pointeur initial doit être mis à NULL.
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	
+	t_list	*current;
+	t_list	*next;
+
+	if (!lst || !*lst || !del)
+		return ;
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		del(current->content);
+		free(current);
+		current = next;
+	}
+	*lst = NULL;
 }

@@ -47,6 +47,10 @@ SRCS_BONUS = \
 	ft_lstsize.c \
 	ft_lstlast.c \
 	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstclear.c \
+	ft_lstiter.c \
+	ft_lstmap.c \
 
 OBJS_BONUS = $(SRCS_BONUS:c=o)
 

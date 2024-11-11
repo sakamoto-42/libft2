@@ -70,7 +70,7 @@ void	ft_relink(t_list **lst, t_list *todel)
 		return ;
 	}
 	while (current->next && current->next != todel)
-		current->next = current->next;
+		current = current->next;
 	if (current->next && current->next == todel)
 		current->next = todel->next;
 }

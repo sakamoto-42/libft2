@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:23:24 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 12:09:03 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:27:52 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 int	ft_lstsize(t_list *lst)
 {
 	int		count;
-	t_list	*current;
 
-	count = 0;
-	current = lst;
-	while (current)
+	if (!lst)
+		return (0);
+	count = 1;
+	while (lst->next)
 	{
-		current = current->next;
-		count++;	
+		lst = lst->next;
+		count++;
 	}
 	return (count);
 }

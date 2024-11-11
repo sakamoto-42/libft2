@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/09 09:06:41 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:32:59 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1274,6 +1274,196 @@ void	ft_putnbr_fd_tester(void)
 	ft_putnbr_fd_sub_tester(123456, 2);
 }
 
+int	ft_lstnew_sub_tester(void *data)
+{
+	t_list	*new;
+	int		res;
+
+	new = ft_lstnew(data);
+	res = 1;
+	if (new->next)
+	{
+		printf("Error :\nnew->next is not NULL\n");
+		res = 0;
+	}
+	else
+		printf("Success :\nnew->next is NULL\n");
+	if (strcmp(data, new->content) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", (char *)data, (char *)new->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected : %s\nGot: %s\n\n", (char *)data, (char *)new->content);
+	return (res);
+}
+
+int	ft_lstnew_tester(void)
+{
+	int	passed;
+
+	passed = 1;
+	passed = ft_lstnew_sub_tester("bonjour");
+	if (!passed)
+		return (0);
+	return (1);
+}
+
+int	ft_lstlast_sub_tester(t_list	*head, void *expected)
+{
+	t_list	*last;
+	int		res;
+
+	last = ft_lstlast(head);
+	res = 1;
+	if (last->next)
+	{
+		printf("Error :\nlast->next is not NULL\n");
+		res = 0;
+	}
+	else
+		printf("Success :\nlast->next is NULL\n");
+	if (strcmp(expected, last->content) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", (char *)expected, (char *)last->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected : %s\nGot: %s\n\n", (char *)expected, (char *)last->content);
+	return (res);
+}
+
+int	ft_lstlast_tester(void)
+{
+	int		passed;
+	t_list	*head;
+
+	passed = 1;
+	head = ft_lstnew("bonjour ");
+	head->next = ft_lstnew("tout ");
+	head->next->next = ft_lstnew("le ");
+	head->next->next->next = ft_lstnew("monde");
+	
+	passed = ft_lstlast_sub_tester(head, "monde");
+	return (passed);
+}
+
+int	ft_lstadd_back_sub_tester(t_list **lst, t_list *new, void *expected)
+{
+	int		res;
+	t_list	*last;
+
+	ft_lstadd_back(lst, new);
+	last = ft_lstlast(*lst);
+	res = 1;
+	if (last->next)
+	{
+		printf("Error :\nlast->next is not NULL\n");
+		res = 0;
+	}
+	else
+		printf("Success :\nlast->next is NULL\n");
+	if (strcmp(expected, last->content) != 0)
+	{
+		printf("Error :\nExpected : %s\nGot: %s\n\n", (char *)expected, (char *)last->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected : %s\nGot: %s\n\n", (char *)expected, (char *)last->content);
+	return (res);
+}
+
+int	ft_lstadd_back_tester(void)
+{
+	int		passed;
+	t_list	*head;
+	t_list	*new;
+
+	passed = 1;
+	head = ft_lstnew("bonjour ");
+	head->next = ft_lstnew("tout ");
+	head->next->next = ft_lstnew("le ");
+	new = ft_lstnew("monde !");
+	passed = ft_lstadd_back_sub_tester(&head, new, "monde !");
+	return (passed);
+}
+
+int	ft_lstadd_front_sub_tester(t_list **lst, t_list *new, void *expected_first, void *expected_second)
+{
+	int		res;
+	t_list	*first;
+
+	ft_lstadd_front(lst, new);
+	first = *lst;
+	res = 1;
+	if (!(first->next))
+	{
+		printf("Error :\nfirst->next is NULL\n");
+		res = 0;
+	}
+	if (strcmp(expected_first, first->content) != 0)
+	{
+		printf("Error :\nExpected first : %s\nGot first : %s\n\n", (char *)expected_first, (char *)first->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected first : %s\nGot first : %s\n\n", (char *)expected_first, (char *)first->content);
+	if (strcmp(expected_second, first->next->content) != 0)
+	{
+		printf("Error :\nExpected second : %s\nGot second : %s\n\n", (char *)expected_second, (char *)first->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected second : %s\nGot second : %s\n\n", (char *)expected_second, (char *)first->next->content);
+	return (res);
+}
+
+int	ft_lstadd_front_tester(void)
+{
+	int		passed;
+	t_list	*head;
+	t_list	*new;
+
+	passed = 1;
+	head = ft_lstnew("tout ");
+	head->next = ft_lstnew("le ");
+	head->next->next = ft_lstnew("monde !");
+	new = ft_lstnew("bonjour ");
+	passed = ft_lstadd_front_sub_tester(&head, new, "bonjour ", "tout ");
+	return (passed);
+}
+
+int	ft_lstlstsize_sub_tester(t_list *lst, int expected)
+{
+	int		size;
+
+	size = ft_lstsize(lst);
+	if (size != expected)
+	{
+		printf("Error :\nExpected : %d\nGot : %d\n\n", expected, size);
+		return (0);
+	}
+	else
+	{
+		printf("Success :\nExpected second : %d\nGot : %d\n\n", expected, size);
+		return (1);
+	}
+}
+
+int	ft_lstsize_tester(void)
+{
+	int		passed;
+	t_list	*head;
+
+	passed = 1;
+	head = ft_lstnew("bonjour ");
+	head->next = ft_lstnew("tout ");
+	head->next->next = ft_lstnew("le ");
+	head->next->next->next = ft_lstnew("monde !");
+	passed = ft_lstlstsize_sub_tester(head, 4);
+	return (passed);
+}
+
 void	ft_main_tester(char *ft_name, int *count)
 {
 	int	res;
@@ -1348,6 +1538,16 @@ void	ft_main_tester(char *ft_name, int *count)
 		ft_putendl_fd_tester();
 	else if (strcmp(ft_name, "putnbr_fd") == 0)
 		ft_putnbr_fd_tester();
+	else if (strcmp(ft_name, "lstnew") == 0)
+		ft_lstnew_tester();
+	else if (strcmp(ft_name, "lstlast") == 0)
+		ft_lstlast_tester();
+	else if (strcmp(ft_name, "lstadd_back") == 0)
+		ft_lstadd_back_tester();
+	else if (strcmp(ft_name, "lstadd_front") == 0)
+		ft_lstadd_front_tester();
+	else if (strcmp(ft_name, "lstsize") == 0)
+		ft_lstsize_tester();
 	if (res)
 	{
 		printf("SUCCESS\n");
@@ -1397,5 +1597,10 @@ int	main(void)
 	ft_main_tester("putstr_fd", &count);
 	ft_main_tester("putendl_fd", &count);
 	ft_main_tester("putnbr_fd", &count);
-	printf("%d/34 tests passed with SUCCESS !\n", count);
+	ft_main_tester("lstnew", &count);
+	ft_main_tester("lstlast", &count);
+	ft_main_tester("lstadd_back", &count);
+	ft_main_tester("lstadd_front", &count);
+	ft_main_tester("lstsize", &count);
+	printf("%d/39 tests passed with SUCCESS !\n", count);
 }

@@ -6,18 +6,19 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:25:35 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/11 18:02:46 by sakamoto-42      ###   ########.fr       */
+/*   Updated: 2024/11/11 19:19:26 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 void	ft_lstdelelement(void *content)
 {
 	if (content)
-		free(content);
+	content = NULL;
 }
 
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
@@ -68,7 +69,7 @@ void	ft_relink(t_list **lst, t_list *todel)
 		current = current->next;
 		return ;
 	}
-	while (current->next != todel)
+	while (current->next && current->next != todel)
 		current->next = current->next;
 	if (current->next && current->next == todel)
 		current->next = todel->next;
@@ -77,15 +78,15 @@ void	ft_relink(t_list **lst, t_list *todel)
 int	main(void)
 {
 	t_list 	*head;
-	t_list	*new;
+	t_list	*to_del;
 
-	head = ft_lstnewelem("Coucou ");
-	new = ft_lstnewelem("tout ");	
-	ft_lstaddlast(&head, new);
-	ft_lstaddlast(&head, ft_lstnewelem("le "));
-	ft_lstaddlast(&head, ft_lstnewelem("monde !"));
-	ft_relink(&head, new);
-	//ft_lstdelone(new, ft_lstdelelement);
+	head = ft_lstnewelem(strdup("Coucou "));
+	to_del = ft_lstnewelem(strdup("tout "));
+	ft_lstaddlast(&head, to_del);
+	ft_lstaddlast(&head, ft_lstnewelem(strdup("le ")));
+	ft_lstaddlast(&head, ft_lstnewelem(strdup("monde !")));
+	ft_relink(&head, to_del);
+	ft_lstdelone(to_del, ft_lstdelelement);
 	while (head)
 	{
 		printf("%s", (char *)head->content);

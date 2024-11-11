@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:25:35 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/11 16:30:56 by sakamoto-42      ###   ########.fr       */
+/*   Updated: 2024/11/11 18:06:49 by sakamoto-42      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (!lst || !del)
 		return ;
 	del(lst->content);
+	lst->content = NULL;
 	free(lst);
 }

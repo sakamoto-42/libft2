@@ -6,7 +6,7 @@
 /*   By: juduchar <juduchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:02:34 by juduchar          #+#    #+#             */
-/*   Updated: 2024/11/10 17:32:59 by juduchar         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:06:51 by juduchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1464,6 +1464,267 @@ int	ft_lstsize_tester(void)
 	return (passed);
 }
 
+void	ft_lstdelcontent(void *content)
+{
+	if (content)
+		free(content);
+}
+
+void	ft_lstdelelement(t_list **lst, t_list *to_delete, void (*del)(void *))
+{
+	if (!lst || !(*lst) || !to_delete)
+		return ;
+	// if the address of the first element of the list is the same as the address of the element to delete
+	// (if the element to delete is the first element of the list) 
+	if (*lst == to_delete)
+	{
+		// change the address of the first element of the list to the address of the next element (the second element) of the list
+		*lst = (*lst)->next;
+		// delete the element to delete
+		ft_lstdelone(to_delete, del);
+		// return
+		return ;
+	}
+	// while current is not NULL (in case of the chain is broken somehow (bug))
+	// or if we arrive to the last element of the list without finding the element to delete
+	// until the next value of the current element (the adress of the next element of current)
+	// is the adress of the element to delete
+	// (until the current element is the element just before the element to delete)
+	while ((*lst)->next && (*lst)->next != to_delete)
+	{
+		// forward to the next element
+		(*lst) = (*lst)->next;
+	}
+	// if the element before the element to delete is found
+	if ((*lst) && (*lst)->next == to_delete)
+	{
+		// link the element before the element to delete
+		// to the element after the element to delete
+		(*lst)->next = to_delete->next;
+		// delete the element to delete
+		ft_lstdelone(to_delete, del);
+	}
+}
+
+int	ft_lstdelone_sub_tester(t_list **head, t_list *to_delete, void (*del)(void *), char *expected_first, char *expected_second, char *expected_third)
+{
+	int		res;
+
+	ft_lstdelelement(head, to_delete, del);
+	res = 1;
+	if (strcmp(expected_first, (*head)->content) != 0)
+	{
+		printf("Error :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)(*head)->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)(*head)->content);
+	if (strcmp(expected_second, (*head)->next->content) != 0)
+	{
+		printf("Error :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)(*head)->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)(*head)->next->content);
+	if (strcmp(expected_third, (*head)->next->next->content) != 0)
+	{
+		printf("Error :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)(*head)->next->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)(*head)->next->next->content);
+	return (res);
+}
+
+int	ft_lstdelone_tester(void)
+{
+	int		passed;
+	t_list	*head;
+	t_list	*to_del;
+
+	passed = 1;
+	head = ft_lstnew(strdup("bonjour "));
+	to_del = ft_lstnew(strdup("tout "));
+	ft_lstadd_back(&head, to_del);
+	ft_lstadd_back(&head, ft_lstnew((strdup("le "))));
+	ft_lstadd_back(&head, ft_lstnew((strdup("monde !"))));
+	passed = ft_lstdelone_sub_tester(&head, to_del, ft_lstdelcontent, "bonjour ", "le ", "monde !");
+	return (passed);
+}
+
+void	ft_lstbreakchain(t_list **lst, t_list **to_break)
+{
+	t_list	*current;
+	
+	if (!lst || !(*lst) || !to_break || !(*to_break))
+		return ;
+	current = *lst;
+	while (current->next && current->next != *to_break)
+		current = current->next;
+	if (current->next == *to_break)
+		current->next = NULL;
+}
+
+int	ft_lstclear_sub_tester(t_list **head, t_list **to_clear, void (*del)(void *), char *expected_first, char *expected_second)
+{
+	int		res;
+
+	ft_lstbreakchain(head, to_clear);
+	ft_lstclear(to_clear, del);
+
+	res = 1;
+	if (strcmp(expected_first, (*head)->content) != 0)
+	{
+		printf("Error :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)(*head)->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)(*head)->content);
+	if (strcmp(expected_second, (*head)->next->content) != 0)
+	{
+		printf("Error :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)(*head)->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)(*head)->next->content);
+	return (res);
+}
+
+int	ft_lstclear_tester(void)
+{
+	int		passed;
+	t_list	*head;
+	t_list	*to_clear;
+
+	passed = 1;
+	head = ft_lstnew(strdup("bonjour "));
+	ft_lstadd_back(&head, ft_lstnew((strdup("tout "))));
+	to_clear = ft_lstnew(strdup("le "));
+	ft_lstadd_back(&head, ft_lstnew((strdup("monde !"))));
+	passed = ft_lstclear_sub_tester(&head, &to_clear, ft_lstdelcontent, "bonjour ", "tout ");
+	return (passed);
+}
+
+void	ft_lstuppercontent(void *content)
+{
+	char	*str;
+
+	if (content)
+	{
+		str = (char *) content;
+		while (*str)
+		{
+			if (islower((int)*str))
+				*str -= 32;
+			str++;
+		}
+	}
+}
+
+int	ft_lstiter_sub_tester(t_list *head, void (*f)(void *), char *expected_first, char *expected_second, char *expected_third)
+{
+	int		res;
+
+	ft_lstiter(head, f);
+	res = 1;
+	if (strcmp(expected_first, head->content) != 0)
+	{
+		printf("Error :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)head->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)head->content);
+	if (strcmp(expected_second, head->next->content) != 0)
+	{
+		printf("Error :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)head->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)head->next->content);
+	if (strcmp(expected_third, head->next->next->content) != 0)
+	{
+		printf("Error :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)head->next->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)head->next->next->content);
+	return (res);
+}
+
+int	ft_lstiter_tester(void)
+{
+	int		passed;
+	t_list	*head;
+
+	passed = 1;
+	head = ft_lstnew(strdup("bonjour "));
+	ft_lstadd_back(&head, ft_lstnew((strdup("le "))));
+	ft_lstadd_back(&head, ft_lstnew((strdup("monde !"))));
+	passed = ft_lstiter_sub_tester(head, ft_lstuppercontent, "BONJOUR ", "LE ", "MONDE !");
+	return (passed);
+}
+
+void	*ft_lstmapuppercontent(void *content)
+{
+	char	*str;
+
+	if (content)
+	{
+		str = (char *) content;
+		while (*str)
+		{
+			if (islower((int)*str))
+				*str -= 32;
+			str++;
+		}
+	}
+	return (content);
+}
+
+int	ft_lstmap_sub_tester(t_list *head, void *(*f)(void *), void (*del)(void *), char *expected_first, char *expected_second, char *expected_third)
+{
+	int		res;
+	t_list	*new_list;
+
+	new_list = ft_lstmap(head, f, del);
+	res = 1;
+	if (strcmp(expected_first, new_list->content) != 0)
+	{
+		printf("Error :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)new_list->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected first : %s\nGot first : %s\n\n", expected_first, (char *)new_list->content);
+	if (strcmp(expected_second, new_list->next->content) != 0)
+	{
+		printf("Error :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)new_list->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected second : %s\nGot second : %s\n\n", expected_second, (char *)new_list->next->content);
+	if (strcmp(expected_third, new_list->next->next->content) != 0)
+	{
+		printf("Error :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)new_list->next->next->content);
+		res = 0;
+	}
+	else
+		printf("Success :\nExpected third : %s\nGot third : %s\n\n", expected_third, (char *)new_list->next->next->content);
+	return (res);
+}
+
+int	ft_lstmap_tester(void)
+{
+	int		passed;
+	t_list	*head;
+
+	passed = 1;
+	head = ft_lstnew(strdup("bonjour "));
+	ft_lstadd_back(&head, ft_lstnew((strdup("le "))));
+	ft_lstadd_back(&head, ft_lstnew((strdup("monde !"))));
+	passed = ft_lstmap_sub_tester(head, ft_lstmapuppercontent, ft_lstdelcontent, "BONJOUR ", "LE ", "MONDE !");
+	return (passed);
+}
+
 void	ft_main_tester(char *ft_name, int *count)
 {
 	int	res;
@@ -1548,6 +1809,14 @@ void	ft_main_tester(char *ft_name, int *count)
 		ft_lstadd_front_tester();
 	else if (strcmp(ft_name, "lstsize") == 0)
 		ft_lstsize_tester();
+	else if (strcmp(ft_name, "lstdelone") == 0)
+		ft_lstdelone_tester();
+	else if (strcmp(ft_name, "lstclear") == 0)
+		ft_lstclear_tester();
+	else if (strcmp(ft_name, "lstiter") == 0)
+		ft_lstiter_tester();
+	else if (strcmp(ft_name, "lstmap") == 0)
+		ft_lstmap_tester();
 	if (res)
 	{
 		printf("SUCCESS\n");
@@ -1602,5 +1871,9 @@ int	main(void)
 	ft_main_tester("lstadd_back", &count);
 	ft_main_tester("lstadd_front", &count);
 	ft_main_tester("lstsize", &count);
-	printf("%d/39 tests passed with SUCCESS !\n", count);
+	ft_main_tester("lstdelone", &count);
+	ft_main_tester("lstclear", &count);
+	ft_main_tester("lstiter", &count);
+	ft_main_tester("lstmap", &count);
+	printf("%d/43 tests passed with SUCCESS !\n", count);
 }
